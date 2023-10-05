@@ -1,0 +1,532 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static '/img/favicon.png' %}" rel="icon">
+  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i'  %}" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+  <script src="{% static '/js/main.js' %}"></script>
+
+  <!-- Template Main CSS File -->
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Day -> Online Train ticket booking system
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
+        <i class="bi bi-phone-fill phone-icon"></i> +91 8549876543
+      </div>
+      <div class="social-links d-none d-md-block">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="index.html">RAILYATHRA</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about" class="btn btn-primary">About</a></li>
+        
+          <li><a class="nav-link scrollto" href="{% url 'login' %}" class="btn btn-primary">LOGIN</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'register' %}" class="btn btn-primary">REGISTER</a></li>
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+       
+    </script>
+   
+    <style>
+
+        
+.registration-container
+ {
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding to the container for spacing */
+    background-color: #FBCEB1; /* Optional background color for the container */
+    border: 1px solid #ccc; /* Optional border for the container */
+    border-radius: 5px; /* Optional border-radius for rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional box shadow */
+}
+
+.registration-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-image: url('{% static "/img/t1.jpg" %}'); /* Use the correct path here */
+        background-size: cover; /* Adjust background size as needed */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: #7becca; /* Optional background color for the container */
+        border: 1px solid #ccc; /* Optional border for the container */
+        border-radius: 5px; /* Optional border-radius for rounded corners */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional box shadow */
+    }
+
+    .page-container {
+        margin-top: 1px; /* Adjust the value to create the desired space between header and background */
+        background-image: url('{% static "/img/t1.jpg" %}'); /* Replace with the correct path to your background image */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: transparent; /* Optional background color */
+        /* Other styles for the page container */
+    }
+    
+        /* Other CSS styles for your page */
+    </style>
+    
+   </style>
+   
+
+
+   
+
+
+  
+         
+
+
+          </style>
+</head>
+<body>
+    
+  
+   
+
+
+    <!-- Navbar End -->
+   
+    <div class="page-container">
+   <center> <b><h2>SIGNUP</h2></b></center>
+                         <div id="home" class="banner-container no-padding">
+                                <div class="container">
+                                    <div class="row mx-auto"></div>
+                                    <div class="slider-det">
+                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                            <div class="registration-container" style="background-image: url('home/img/t1-1.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;"> <!-- Apply the class here -->
+                                              
+                                                <form id="signup-form" method="POST">
+                                                    {% csrf_token %}
+
+
+                            <!-- Personal Information -->
+                            <div class="form-group">
+                                <label for="first_name">First Name:</label>
+                                <input type="text" id="first_name" name="first_name" class="form-control" required>
+                                <span id="first_name-error" class="error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="last_name">Last Name:</label>
+                                <input type="text" id="last_name" name="last_name" class="form-control" required>
+                                <span id="last_name-error" class="error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address:</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                                <span id="email-error" class="error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                                <span id="phone-error" class="error"></span>
+                            </div>
+                           
+                            <!-- User Account -->
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" class="form-control" required>
+                                <span id="username-error" class="error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
+                                <span id="password-error" class="error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password:</label>
+                                <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
+                                <span id="confirm-password-error" class="error"></span>
+                            </div>
+                            
+                           
+                            <!-- Submit Button -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="w-10 col-12 d-flex justify-content-center">
+<form method="POST" autocomplete="off"> 
+<div class="form-group" > 
+
+
+    
+</div>
+</form>
+</div>
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+    <div class="row pt-5">
+       
+        <div class="col-lg-8 col-md-12">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-primary mb-4">Get In Touch</h5>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>12th Street,Kottayam,Kerala</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope mr-2"></i>railyathra@example.com</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-primary mb-4">Popular Links</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Team</a>
+                        <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<script>
+   // Get references to the form and input fields
+   const form = document.getElementById("signup-form");
+   const usernameInput = document.getElementById("username");
+   const phoneInput = document.getElementById("phone");
+   const first_nameInput = document.getElementById("first_name");
+   const last_nameInput = document.getElementById("last_name");
+   const emailInput = document.getElementById("email");
+   const passwordInput = document.getElementById("password");
+   const confirmPasswordInput = document.getElementById("confirm-password");
+   const usernameError = document.getElementById("username-error");
+   const emailError = document.getElementById("email-error");
+   const passwordError = document.getElementById("password-error");
+   const confirmPasswordError = document.getElementById("confirm-password-error");
+   const first_nameError = document.getElementById("first_name-error");
+   const last_nameError = document.getElementById("last_name-error");
+   const phoneError = document.getElementById("phone-error");
+
+   // Function to validate the form
+   function validateForm() {
+       // Reset previous error messages
+       usernameError.textContent = "";
+       emailError.textContent = "";
+       passwordError.textContent = "";
+       confirmPasswordError.textContent = "";
+       first_nameError.textcontent="";
+       last_nameError.textcontent="";
+       phoneError.textContent="";
+
+       // Get the values of the input fields
+       const phoneNumber = phoneInput.value.trim();
+       const first_name = first_nameInput.value.trim();
+       const last_name = last_nameInput.value.trim();
+       const username = usernameInput.value.trim();
+       const email = emailInput.value.trim();
+       const password = passwordInput.value.trim();
+       const confirmPassword = confirmPasswordInput.value.trim();
+
+       // Validate first name (should be a string)
+       if (first_name.length < 3) {
+           first_nameError.textContent = "Firstname must be at least 3 characters.";
+       } else if (!/^[a-zA-Z]+$/.test(first_name)) {
+           first_nameError.textContent = "Firstname can only contain letters.";
+       }
+
+       // Validate last name (should be a string)
+       if (last_name.length < 3) {
+           last_nameError.textContent = "Lastname must be at least 3 characters.";
+       } else if (!/^[a-zA-Z]+$/.test(last_name)) {
+           last_nameError.textContent = "lastname can only contain letters.";
+       }
+
+     // Validate phone number (should be a number with 10 digits)
+     
+      if (!/^\d{10}$/.test(phoneNumber)) {
+       phoneError.textContent = "*Phone number must be a 10-digit number.";
+     } else {
+       phoneError.textContent = "";
+     }
+
+
+       // Validate username (for example, require a minimum length and only letters)
+       if (username.length < 3) {
+           usernameError.textContent = "*Username must be at least 3 characters.";
+       } else if (!/^[a-zA-Z]+$/.test(username)) {
+           usernameError.textContent = "*Username can only contain letters.";
+       }
+
+       // Validate email format
+       if (!/^\S+@\S+\.\S+$/.test(email)) {
+           emailError.textContent = "*Invalid email format.";
+       }
+
+       // Validate password (for example, require a minimum length)
+       if (password.length < 6) {
+           passwordError.textContent = "*Password must be at least 6 characters.";
+       }
+
+       // Validate confirm password
+       if (confirmPassword !== password) {
+           confirmPasswordError.textContent = "Passwords do not match.";
+       }
+
+       // Check if any error messages are displayed
+       const hasErrors = !!(
+           usernameError.textContent ||
+           emailError.textContent ||
+           passwordError.textContent ||
+           confirmPasswordError.textContent ||
+           first_nameError.textContent ||
+           last_nameError.textContent ||
+           phoneError.textContent
+       );
+
+       // If any errors exist, prevent form submission
+       if (hasErrors) {
+           return false;
+       }
+
+       // If all validations pass, allow form submission
+       return true;
+   }
+
+   // Attach the validateForm function to the form's submit event
+   form.addEventListener("submit", function (event) {
+       if (!validateForm()) {
+           event.preventDefault(); // Prevent form submission if validation fails
+       }
+   });
+
+   // Real-time validation for all fields as the user types
+   usernameInput.addEventListener("input", function () {
+       validateUsername();
+   });
+
+   emailInput.addEventListener("input", function () {
+       validateEmail();
+   });
+
+   passwordInput.addEventListener("input", function () {
+       validatePassword();
+   });
+
+   confirmPasswordInput.addEventListener("input", function () {
+       validateConfirmPassword();
+   });
+   first_nameInput.addEventListener("input", function () {
+       validatefirst_name();
+   });
+   last_nameInput.addEventListener("input", function () {
+       validatelast_name();
+   });
+   
+   phoneInput.addEventListener("input", function () {
+       validatePhoneNumber();
+   });
+
+   // Helper functions for individual field validation
+   function validateUsername() {
+       const username = usernameInput.value.trim();
+       if (username.length < 3) {
+           usernameError.textContent = "Username must be at least 3 characters.";
+       } else if (!/^[a-zA-Z]+$/.test(username)) {
+           usernameError.textContent = "Username can only contain letters.";
+       } else {
+           usernameError.textContent = "";
+       }
+   }
+
+   function validateEmail() {
+       const email = emailInput.value.trim();
+       if (!/^\S+@\S+\.\S+$/.test(email)) {
+           emailError.textContent = "Invalid email format.";
+       } else {
+           emailError.textContent = "";
+       }
+   }
+
+   function validatePassword() {
+       const password = passwordInput.value.trim();
+       const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+   
+       if (password.length < 6) {
+           passwordError.textContent = "Password must be at least 6 characters.";
+       } else if (!specialChars.test(password)) {
+           passwordError.textContent = "Password must contain at least one special character.";
+       } else {
+           passwordError.textContent = "";
+       }
+   }
+   
+   function validateConfirmPassword() {
+       const confirmPassword = confirmPasswordInput.value.trim();
+       const password = passwordInput.value.trim();
+       if (confirmPassword !== password) {
+           confirmPasswordError.textContent = "Passwords do not match.";
+       } else {
+           confirmPasswordError.textContent = "";
+       }
+   }
+   function validatefirst_name() {
+    const first_name = first_nameInput.value.trim();
+
+    if (first_name.length < 3) {
+        first_nameError.textContent = "First name must be at least 3 characters.";
+    } else if (!/^[a-zA-Z\s]+$/.test(first_name)) {
+        first_nameError.textContent = "First name can only contain letters and spaces.";
+    } else if (/\d/.test(first_name)) {
+        first_nameError.textContent = "First name cannot contain numbers.";
+    } else if (/^\s/.test(first_name)) {
+        first_nameError.textContent = "First name cannot start with a space.";
+    } else {
+        first_nameError.textContent = "";
+    }
+}
+
+
+function validatelast_name() {
+    const last_name = last_nameInput.value.trim();
+
+    if (last_name.length < 1) {
+        last_nameError.textContent = "Last name must be at least 1 characters.";
+    } else if (!/^[a-zA-Z\s]+$/.test(last_name)) {
+        last_nameError.textContent = "Last name can only contain letters and spaces.";
+    } else if (/\d/.test(first_name)) {
+        last_nameError.textContent = "Last name cannot contain numbers.";
+    } else if (/^\s/.test(first_name)) {
+        last_nameError.textContent = "Last name cannot start with a space.";
+    } else {
+        last_nameError.textContent = "";
+    }
+}
+   
+   
+   function validatePhoneNumber() {
+    const phoneNumber = phoneInput.value.trim();
+    const regex = /^[6-9]\d{9}$/; // Example pattern for 10-digit number starting with 6, 7, 8, or 9
+    
+    if (!regex.test(phoneNumber)) {
+        phoneError.textContent = "Phone number must be a valid 10-digit number.";
+    
+    } else if (!/^\d+$/.test(phoneNumber)) {
+        phoneError.textContent = "Phone number must contain only numeric digits.";
+    
+    } else {
+        phoneError.textContent = "";
+    }
+}
+
+
+
+
+</script>
+</body>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
+
+
+
+
+</html>
+
+
+
+
+ 
+
+
