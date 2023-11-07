@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Edit Your Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-group">
+        <label for="{{ form.user.id_for_label }}">Username:</label>
+        {{ form.user }}
+        {{ form.user.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.age.id_for_label }}">Age:</label>
+        {{ form.age }}
+        {{ form.age.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.gender.id_for_label }}">Gender:</label>
+        {{ form.gender }}
+        {{ form.gender.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.address.id_for_label }}">Address:</label>
+        {{ form.address }}
+        {{ form.address.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.profile_photo.id_for_label }}">Profile Photo (JPG or PNG only):</label>
+        {{ form.profile_photo }}
+        {{ form.profile_photo.errors }}
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+{% endblock %}

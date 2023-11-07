@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Bootstrap Template - Login</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static '/img/favicon.png' %}" rel="icon">
+  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i'  %}" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+  <script src="{% static '/js/main.js' %}"></script>
+
+  <!-- Template Main CSS File -->
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+
+  <style>
+    .login-container
+     {
+        max-width: 400px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container horizontally */
+        padding: 20px; /* Add padding to the container for spacing */
+        background-color: #FBCEB1; /* Optional background color for the container */
+        border: 1px solid #ccc; /* Optional border for the container */
+        border-radius: 5px; /* Optional border-radius for rounded corners */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional box shadow */
+    }
+    .error-box
+    {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    
+    
+        
+    </style>
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
+        <i class="bi bi-phone-fill phone-icon"></i> +91 8549876543
+      </div>
+      <div class="social-links d-none d-md-block">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="index.html">RAILYATHRA</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="about" class="btn btn-primary">About</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'login' %}" class="btn btn-primary">LOGIN</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'register' %}" class="btn btn-primary">REGISTER</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+
+  <div class="page-container">
+    <center><b><h2>LOGIN</h2></b></center>
+    <div id="home" class="banner-container no-padding">
+      <div class="container">
+        <div class="col-md-6 mx-auto">
+        <div class="row mx-auto"></div>
+        <div class="slider-det">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="registration-container" style="background-image: url('home/img/t1.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+                
+                <form id="login-form" method="POST">
+                {% csrf_token %}
+                <!-- User Account -->
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <p class="small mb-5 pb-lg-2"><a class="text-muted" href="{% url 'password_reset' %}">Forgot password?</a></p>
+
+
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+              </form>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+  
+  
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+    <div class="row pt-5">
+      <div class="col-lg-8 col-md-12">
+        <div class="row">
+          <div class="col-md-4 mb-5">
+            <h5 class="text-primary mb-4">Get In Touch</h5>
+            <p><i class="fa fa-map-marker-alt mr-2"></i>12th Street, Kottayam, Kerala</p>
+            <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+            <p><i class="fa fa-envelope mr-2"></i>railyathra@example.com</p>
+            <div class="d-flex justify-content-start mt-4">
+              <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="col-md-4 mb-5">
+            <h5 class="text-primary mb-4">Popular Links</h5>
+            <div class="d-flex flex-column justify-content-start">
+              <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+              <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+              <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+              <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Team</a>
+              <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+  <script>
+    // Get references to the form and input fields
+    const form = document.getElementById("login-form");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const usernameError = document.getElementById("username-error");
+    const passwordError = document.getElementById("password-error");
+
+    // Function to validate the form
+    function validateForm() {
+        // Reset previous error messages
+        usernameError.textContent = "";
+        passwordError.textContent = "";
+
+        // Get the values of the input fields
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        // Validate username (for example, require a minimum length and only letters)
+        if (username.length < 3) {
+            usernameError.textContent = "Username must be at least 3 characters.";
+            return false; // Prevent form submission
+        } else if (!/^[a-zA-Z]+$/.test(username)) {
+            usernameError.textContent = "Username can only contain letters.";
+            return false; // Prevent form submission
+        }
+
+        // Validate password (for example, require a minimum length)
+        if (password.length < 6) {
+            passwordError.textContent = "Password must be at least 6 characters.";
+            return false; // Prevent form submission
+        }
+
+        // If all validations pass, allow form submission
+        return true;
+    }
+
+    // Attach the validateForm function to the form's submit event
+    form.addEventListener("submit", function (event) {
+        if (!validateForm()) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+
+    // Real-time validation for the username field
+    usernameInput.addEventListener("input", function () {
+        const username = usernameInput.value.trim();
+
+        // Validate username as the user types (for example, check if it's too short and contains only letters)
+        if (username.length < 3) {
+            usernameError.textContent = "Username must be at least 3 characters.";
+        } else if (!/^[a-zA-Z]+$/.test(username)) {
+            usernameError.textContent = "Username can only contain letters.";
+        } else {
+            usernameError.textContent = ""; // Clear the error message if valid
+        }
+    });
+</script>
+
+</body>
+
+</html>

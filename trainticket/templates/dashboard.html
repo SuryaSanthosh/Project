@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        /* Basic styling for the admin dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav li {
+            margin: 10px 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .menu-item {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .menu-item a {
+            text-decoration: none;
+            color: #333;
+            background-color: #f8f8f8;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            background-color: #444;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li class="menu-item"><a href="#">Dashboard</a></li>
+            <li class="menu-item"><a href="{% url 'userview' %}">Users</a></li>
+            <li class="menu-item"><a href="{% url 'adminfeedback' %}">Feedback</a></li>
+            <li class="menu-item"><a href="#">Orders</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <!-- Your dashboard content goes here -->
+            <h2>Welcome to the Admin Dashboard</h2>
+            <p>Here, you can manage various aspects of your system or website.</p>
+        </div>
+    </div>
+    <footer>
+        &copy; 2023 Admin Dashboard
+    </footer>
+</body>
+</html>
