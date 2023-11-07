@@ -29,3 +29,28 @@ class Feedback(models.Model):
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
+
+from django.db import models
+class Train(models.Model):
+    train_name = models.CharField(max_length=100)
+    train_number = models.CharField(max_length=10)
+    departure_station = models.CharField(max_length=100)
+    departure_time = models.TimeField()
+    arrival_station = models.CharField(max_length=100)
+    arrival_time = models.TimeField()
+    duration = models.CharField(max_length=20)
+    available_classes = models.CharField(max_length=100)
+
+
+
+
+
+from django.db import models
+
+class Station(models.Model):
+    station_name = models.CharField(max_length=255)
+    code = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.station_name

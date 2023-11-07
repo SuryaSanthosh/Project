@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Train</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Train</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="train_name">Train Name:</label>
+            <input type="text" id="train_name" name="train_name" required>
+
+            <label for="train_number">Train Number:</label>
+            <input type="text" id="train_number" name "train_number" required>
+
+            <label for="departure_station">Departure Station:</label>
+            <input type="text" id="departure_station" name="departure_station" required>
+
+            <label for="departure_time">Departure Time:</label>
+            <input type="text" id="departure_time" name="departure_time" required>
+
+            <label for="arrival_station">Arrival Station:</label>
+            <input type="text" id="arrival_station" name="arrival_station" required>
+
+            <label for="arrival_time">Arrival Time:</label>
+            <input type="text" id="arrival_time" name="arrival_time" required>
+
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" name="duration" required>
+
+            <label for="available_classes">Available Classes:</label>
+            <select id="available_classes" name="available_classes" required>
+                <option value="Sleeper">Sleeper</option>
+                <option value="AC 3 Tier">AC 3 Tier</option>
+                <option value="AC 2 Tier">AC 2 Tier</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <button type="submit">Add Train</button>
+        </form>
+    </div>
+    
+</body>
+</html>

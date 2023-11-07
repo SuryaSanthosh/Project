@@ -196,7 +196,7 @@
                   
                               {% endif %}
                               <a href="{% url 'edit_profile' %}"><button class="btn btn-success">Edit Profile</button></a>
-                               <a href="search"><button class="btn btn-success">Search/Book Trains</button></a>
+                               <a href="{% url 'trainview' %}"><button class="btn btn-success">Search/Book Trains</button></a>
                                <a href="schedule"><button class="btn btn-info">Check Schedule</button></a>
                                <a href="pnr"><button class="btn btn-warning">Check PNR</button></a>
                                <a href="cancel"><button class="btn btn-danger">Cancel Seat</button></a>

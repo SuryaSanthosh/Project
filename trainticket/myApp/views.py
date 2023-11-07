@@ -104,6 +104,7 @@ def edit_profile(request):
     return render(request, 'edit_profile.html', {'form': form})
 
 
+
 def sbooktrain(request):
 
     return render(request,'sbooktrain.html')
@@ -177,6 +178,8 @@ def submit_feedback(request):
     return render(request, 'feedback_form.html')
 
 
+
+
 def feedback_thankyou(request):
      return render(request,'feedback_thankyou.html')
 
@@ -191,6 +194,7 @@ def adminfeedback(request):
 
 
 
+from .forms import TrainForm
 
 def dashboard(request):
     # You can add logic here to retrieve data for the dashboard
@@ -199,3 +203,52 @@ def dashboard(request):
         'welcome_message': 'Welcome to the Admin Dashboard. Manage your system here.',
     }
     return render(request, 'dashboard.html', context)
+
+
+
+
+
+
+
+
+
+from .forms import TrainForm
+
+def addtrain(request):
+    if request.method == 'POST':
+        form = TrainForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('train_list')  # Redirect to the train list page
+    else:
+        form = TrainForm()
+    return render(request, 'addtrain.html', {'form': form})
+
+
+from .models import Train
+def trainview(request):
+    trains = Train.objects.all()  # Retrieve all available trains from the database
+    context = {'trains': trains}
+    return render(request, 'trainview.html', context)
+
+
+
+
+
+from .models import Station
+
+def station_list(request):
+    stations = Station.objects.all()
+    return render(request, 'station_list.html', {'stations': stations})
+from django.shortcuts import render, redirect
+from .forms import StationForm
+
+def add_station(request):
+    if request.method == 'POST':
+        form = StationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('station_list')  # Redirect to station list view
+    else:
+        form = StationForm()
+    return render(request, 'add_station.html', {'form': form})

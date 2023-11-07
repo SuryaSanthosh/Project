@@ -9,6 +9,7 @@
             margin: 0;
             padding: 0;
             background-color: #f3f3f3;
+            display: flex;
         }
 
         header {
@@ -21,20 +22,39 @@
         nav {
             background-color: #444;
             color: #fff;
-            padding: 10px;
+            min-width: 250px;
+            padding: 20px 0;
+            text-align: center;
         }
 
         nav ul {
             list-style-type: none;
             padding: 0;
-            text-align: center;
         }
 
         nav li {
-            margin: 10px 0;
+            margin: 15px 0;
+        }
+
+        /* Larger menu buttons styled as standard buttons */
+        .menu-item a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            padding: 15px 0;
+            display: block;
+            border: none;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            background-color: #444;
         }
 
         .container {
+            flex: 1;
             padding: 20px;
         }
 
@@ -63,49 +83,45 @@
         li {
             list-style: none;
         }
-
-        .menu-item {
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        .menu-item a {
-            text-decoration: none;
-            color: #333;
-            background-color: #f8f8f8;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: block;
-            transition: background-color 0.3s ease;
-        }
-
-        .menu-item a:hover {
-            background-color: #444;
-            color: #fff;
-        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Admin Dashboard</h1>
-    </header>
     <nav>
         <ul>
             <li class="menu-item"><a href="#">Dashboard</a></li>
             <li class="menu-item"><a href="{% url 'userview' %}">Users</a></li>
             <li class="menu-item"><a href="{% url 'adminfeedback' %}">Feedback</a></li>
-            <li class="menu-item"><a href="#">Orders</a></li>
+            <li class="menu-item"><a href="{% url 'addtrain' %}">Add Train</a></li>
+            <li class="menu-item"><a href="{% url 'add_station' %}">Add Stations</a></li>
+            <li class="menu-item"><a href="#">Add Routes</a></li>
+            <li class="menu-item"><a href="#">Ticket Management</a></li>
         </ul>
     </nav>
     <div class="container">
+        <header>
+            <h1>Admin Dashboard</h1>
+        </header>
         <div class="content">
             <!-- Your dashboard content goes here -->
             <h2>Welcome to the Admin Dashboard</h2>
-            <p>Here, you can manage various aspects of your system or website.</p>
+          
         </div>
+        <div class="statistics">
+            <div class="statistic">
+                <h3>Total Users</h3>
+                <p>{{ user_count }}</p>
+            </div>
+            <div class="statistic">
+                <h3>Total Bookings</h3>
+                <p>{{ booking_count }}</p>
+            </div>
+            <div class="statistic">
+                <h3>Total Revenue</h3>
+                <p>{{ revenue }}</p>
+            </div>
+        </div>
+        <!-- Add more sections and functionalities as per your project requirements -->
     </div>
-    <footer>
-        &copy; 2023 Admin Dashboard
-    </footer>
+    
 </body>
 </html>

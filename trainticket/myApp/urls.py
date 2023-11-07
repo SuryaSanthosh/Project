@@ -24,6 +24,10 @@ urlpatterns=[
     path('feedback_thankyou/', views.feedback_thankyou, name='feedback_thankyou'), 
     path("adminfeedback",views.adminfeedback,name='adminfeedback'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('addtrain/', views.addtrain, name='addtrain'),
+    path('trainview/', views.trainview, name='trainview'),
 
+    path('add_station/', views.add_station, name='add_station'),
+    path('station_list/', views.station_list, name='station_list'),
 ]
 
