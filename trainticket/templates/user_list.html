@@ -186,24 +186,27 @@
                                 </div>
                             </div>
                           
-                            <div class="row" style="margin-top:0px; opacity: 80%; ">
+                            <div class="row" style="margin-top: 20px; opacity: 80%;">
                               <div class="col-lg-1"></div>
-                              {% if request.user.is_superuser %}
-                              <a href="addT"><button class="btn btn-basic">Add Trains</button></a>
-                              <a href="addST"><button class="btn btn-primary">Add Stations</button></a>
-                              <a href="addR"><button class="btn btn-warning">Add Route</button></a>
-                              <a href="addRT"><button class="btn btn-default">Add Route Station</button></a>
-                  
-                              {% endif %}
-                              <a href="{% url 'edit_profile' %}"><button class="btn btn-success">Edit Profile</button></a>
-                               <a href="{% url 'trainview' %}"><button class="btn btn-success">Search/Book Trains</button></a>
-                               <a href="schedule"><button class="btn btn-info">Check Schedule</button></a>
-                               <a href="pnr"><button class="btn btn-warning">Check PNR</button></a>
-                               <a href="cancel"><button class="btn btn-danger">Cancel Seat</button></a>
-                               <a href="{% url 'submit_feedback' %}"><button class="btn btn-danger">Feedback</button></a>
-                  
+                              <div class="col-lg-3">
+                                <div class="btn-group-vertical">
+                                  {% if request.user.is_superuser %}
+                                    <a href="{% url 'train_view' %}" class="btn btn-primary btn-block">Add Trains</a>
+                                    <a href="{% url 'station_list' %}" class="btn btn-primary btn-block">Add Stations</a>
+                                    <a href="addR" class="btn btn-primary btn-block">Add Route</a>
+                                    <a href="addRT" class="btn btn-primary btn-block">Add Route Station</a>
+                                  {% endif %}
+                                  <a href="edit_profile" class="btn btn-primary btn-block">Edit Profile</a>
+                                  <a href="{% url 'trainview' %}" class="btn btn-primary btn-block">Search/Book Trains</a>
+                                  <a href="schedule" class="btn btn-primary btn-block">Check Schedule</a>
+                                  <a href="pnr" class="btn btn-primary btn-block">Check PNR</a>
+                                  <a href="cancel" class="btn btn-primary btn-block">Cancel Seat</a>
+                                  <a href="{% url 'submit_feedback' %}" class="btn btn-primary btn-block">Feedback</a>
+                                </div>
+                              </div>
                               <div class="col-lg-1"></div>
-                          </div>
+                            </div>
+                            
 
 
     </div>

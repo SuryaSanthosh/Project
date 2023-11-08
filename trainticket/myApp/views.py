@@ -93,15 +93,24 @@ def handlelogout(request):
 
 
 def edit_profile(request):
-    user_profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    else:
-        form = UserProfileForm(instance=user_profile)
-    return render(request, 'edit_profile.html', {'form': form})
+        # Get updated data from the form
+        first_name = request.POST['first-name']
+        last_name = request.POST['last-name']
+        email = request.POST['email']
+
+        # Update the user's profile with the new data
+        user = request.user
+        user.username = first_name
+        user.last_name = last_name
+        user.email = email
+
+        user.save()
+
+        messages.success(request, 'Profile updated successfully')
+        return redirect('myprofile')
+
+    return render(request, 'edit_profile.html', {'user': request.user})
 
 
 
@@ -212,17 +221,39 @@ def dashboard(request):
 
 
 
-from .forms import TrainForm
+from django.shortcuts import render, redirect
+from .models import Train
+from django.contrib import messages
 
-def addtrain(request):
+def add_train(request):
     if request.method == 'POST':
-        form = TrainForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('train_list')  # Redirect to the train list page
-    else:
-        form = TrainForm()
-    return render(request, 'addtrain.html', {'form': form})
+        train_name = request.POST['train_name']
+        train_number = request.POST['train_number']
+        departure_station = request.POST['departure_station']
+        departure_time = request.POST['departure_time']
+        arrival_station = request.POST['arrival_station']
+        arrival_time = request.POST['arrival_time']
+        duration = request.POST['duration']
+        available_classes = request.POST['available_classes']
+
+        # Create a new Train object and save it to the database
+        train = Train(
+            train_name=train_name,
+            train_number=train_number,
+            departure_station=departure_station,
+            departure_time=departure_time,
+            arrival_station=arrival_station,
+            arrival_time=arrival_time,
+            duration=duration,
+            available_classes=available_classes
+        )
+        train.save()
+
+        messages.success(request, 'Train added successfully')  # Display a success message
+        return redirect('add_train')  # Redirect to the add_train page to add more trains
+
+    return render(request, 'addtrain.html')
+
 
 
 from .models import Train
@@ -252,3 +283,9 @@ def add_station(request):
     else:
         form = StationForm()
     return render(request, 'add_station.html', {'form': form})
+
+
+
+
+def myprofile(request):
+    return render(request, 'myprofile.html')

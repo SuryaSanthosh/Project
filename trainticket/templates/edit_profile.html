@@ -7,7 +7,7 @@
                             <hr>
 
                             <label for="first-name" class="label">First Name</label>
-                            <input type="text" name="first_name" id="first-name" class="form-control" value="{% if user_profile.first_name %}{{ user_profile.first_name }}{% endif %}" {% if not user_profile.first_name %}required{% endif %} readonly>
+                            <input type="text" name="first_name" id="first-name" class="form-control" value="{% user.first_name %}>
                             <hr>
 
                             <label for="last-name" class="label">Last Name</label>

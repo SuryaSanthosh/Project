@@ -15,8 +15,8 @@ urlpatterns=[
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
     path('sbboktrain',views.sbooktrain,name="sbboktrain"),
-    path('user_list/', views.user_list, name="user_list"),
-    path('edit_profile/',views.edit_profile,name="edit_profile"),
+    path('user_list', views.user_list, name="user_list"),
+    path('edit_profile',views.edit_profile,name="edit_profile"),
     path('userview/',views.userview,name='userview'),
     path('activate_user/<int:user_id>/', views.activate_user, name='activate_user'),
     path('deactivate_user/<int:user_id>/', views.deactivate_user, name='deactivate_user'),
@@ -24,8 +24,11 @@ urlpatterns=[
     path('feedback_thankyou/', views.feedback_thankyou, name='feedback_thankyou'), 
     path("adminfeedback",views.adminfeedback,name='adminfeedback'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('addtrain/', views.addtrain, name='addtrain'),
+    path('addtrain/', views.add_train, name='addtrain'),
     path('trainview/', views.trainview, name='trainview'),
+    path('myprofile',views.myprofile,name='myprofile'),
+
+
 
     path('add_station/', views.add_station, name='add_station'),
     path('station_list/', views.station_list, name='station_list'),

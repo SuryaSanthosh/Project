@@ -36,12 +36,25 @@
 <body>
     <div class="container">
         <h1>Station List</h1>
-        <label for="station_select">Select a Station:</label>
-        <select id="station_select" name="station_select">
-            <option value="station_1">Station 1</option>
-            <option value="station_2">Station 2</option>
-            <!-- Add more stations dynamically -->
-        </select>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>State</th>
+                <th>District</th>
+            </tr>
+            {% for station in stations %}
+                <tr>
+                    <td>{{ station.station_name }}</td>
+                    <td>{{ station.state }}</td>
+                    <td>{{ station.district }}</td>
+                    <td>{{ station.code }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No stations available.</td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 </body>
 </html>
