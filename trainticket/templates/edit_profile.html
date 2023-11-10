@@ -1,66 +1,181 @@
-<form method="post" action="" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <label for="user-image" class="label">Upload Profile Image</label>
-                            <input type="file" name="image" id="user-image" class="form-control" accept="image/*" onchange="updateImageLabel()" {% if not user_profile.image %}required{% endif %} readonly>
-                            <span id="image-label">{% if user_profile.image %}{{ user_profile.image.name }}{% else %}No file chosen{% endif %}</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-                            <hr>
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
 
-                            <label for="first-name" class="label">First Name</label>
-                            <input type="text" name="first_name" id="first-name" class="form-control" value="{% user.first_name %}>
-                            <hr>
+        h1 {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-                            <label for="last-name" class="label">Last Name</label>
-                            <input type="text" name="last_name" id="last-name" class="form-control" value="{% if user_profile.last_name %}{{ user_profile.last_name }}{% endif %}" {% if not user_profile.last_name %}required{% endif %} readonly>
-                            <hr>
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
 
-                            <label for="mobile" class="label">Mobile Number</label>
-                            <input type="text" name="mobile" id="mobile" class="form-control" value="{% if user_profile.mobile %}{{ user_profile.mobile }}{% endif %}" {% if not user_profile.mobile %}required{% endif %} readonly>
-                            <hr>
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
 
-                            <label for="address" class="label">Address</label>
-                            <input type="text" name="address" id="address" class="form-control" value="{% if user_profile.address %}{{ user_profile.address }}{% endif %}" {% if not user_profile.address %}required{% endif %} readonly>
-                            <hr>
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-                            <div class="form-group">
-                                {% if created %}
-                                    <button type="submit" class="btn btn-lg btn-success" id="save-button">Save</button>
-                                {% else %}
-                                    <button type="button" class="btn btn-lg btn-primary" id="edit-button">Edit</button>
-                                    <button type="submit" class="btn btn-lg btn-success" id="save-button" style="display: none;">Save</button>
-                                {% endif %}
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        .error-message {
+            color: #ff0000;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update User Profile</h1>
+        <form id="updateForm" method="post" action="#" enctype="multipart/form-data">
+            <!-- Your existing form content here -->
+            <label for="user-image">Upload Profile Image</label>
+            <input type="file" name="image" id="user-image" class="form-control" accept="image/*" onchange="updateImageLabel()">
+            <span id="image-label">No file chosen</span>
+
+            <label for="first-name">First Name</label>
+            <input type="text" name="first_name" id="first-name" class="form-control" value="John" required>
+
+            <label for="last-name">Last Name</label>
+            <input type="text" name="last_name" id="last-name" class="form-control" value="Doe" required>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="john.doe@example.com" required>
+
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" name="mobile" id="mobile" class="form-control" value="1234567890" required>
+
+            <label for="address">Address</label>
+            <input type="text" name="address" id="address" class="form-control" value="123 Main St" required>
+
+            <hr>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success">Save</button>
             </div>
-        </div>
-    </div>
+        </form>
+        <!-- Your existing scripts -->
+        <script>
+            document.getElementById('updateForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the form from submitting for this example
 
-  
-    <!-- Add this div where it makes sense, for example, at the end of the body -->
-    <div id="hasDetails" style="display:none;" data-has-details="{% if user_profile.first_name or user_profile.last_name or user_profile.mobile or user_profile.address %}true{% else %}false{% endif %}"></div>
+                // Perform form validation here
+                var isValid = validateForm();
 
-    <!-- Your existing scripts -->
-    <script>
-        var hasDetails = document.getElementById('hasDetails').getAttribute('data-has-details') === 'true';
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            toggleReadOnly(hasDetails);
-        });
-
-        document.getElementById('edit-button').addEventListener('click', function() {
-            toggleReadOnly(false);
-        });
-
-        function toggleReadOnly(readOnly) {
-            var formFields = document.querySelectorAll('.form-control');
-            formFields.forEach(function(field) {
-                field.readOnly = readOnly;
+                if (isValid) {
+                    // If the form is valid, you can submit it or perform further actions
+                    console.log('Form submitted successfully');
+                } else {
+                    console.log('Form validation failed');
+                }
             });
 
-            document.getElementById('save-button').style.display = readOnly ? 'none' : 'block';
-            document.getElementById('edit-button').style.display = readOnly ? 'block' : 'none';
-        }
-    </script>
+            function validateForm() {
+                var formFields = document.querySelectorAll('.form-control');
+                var isValid = true;
+
+                formFields.forEach(function (field) {
+                    // Example: Validate each field (you can add more specific validations)
+                    if (!field.value.trim()) {
+                        displayErrorMessage(field, 'This field is required.');
+                        isValid = false;
+                    } else {
+                        clearErrorMessage(field);
+                    }
+                });
+
+                return isValid;
+            }
+
+            function displayErrorMessage(field, message) {
+                var errorMessage = field.parentElement.querySelector('.error-message');
+                if (!errorMessage) {
+                    errorMessage = document.createElement('div');
+                    errorMessage.className = 'error-message';
+                    field.parentElement.appendChild(errorMessage);
+                }
+                errorMessage.textContent = message;
+            }
+
+            function clearErrorMessage(field) {
+                var errorMessage = field.parentElement.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.textContent = '';
+                }
+            }
+
+            function updateImageLabel() {
+                var input = document.getElementById('user-image');
+                var label = document.getElementById('image-label');
+                label.textContent = input.files[0] ? input.files[0].name : 'No file chosen';
+            }
+        </script>
+    </div>
 </body>
+</html>

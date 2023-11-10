@@ -289,3 +289,14 @@ def add_station(request):
 
 def myprofile(request):
     return render(request, 'myprofile.html')
+
+
+
+
+
+
+
+
+
+
+
