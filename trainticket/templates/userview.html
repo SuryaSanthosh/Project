@@ -48,6 +48,51 @@
         border: none;
         cursor: pointer;
     }
+    .activate-button {
+        background-color: #4CAF50; /* Green */
+    }
+
+    .deactivate-button {
+        background-color: #f44336; /* Red */
+    }
+    .header-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header-container h1 {
+        color: #333;
+    }
+
+    .serial-number {
+        width: 50px;
+    }
+    .pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination .step-links {
+        display: inline-block;
+    }
+
+    .pagination .step-links a {
+        padding: 10px;
+        margin: 0 5px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    .pagination .step-links .current {
+        padding: 10px;
+        margin: 0 5px;
+        text-decoration: none;
+        background-color: #333;
+        color: #fff;
+    }
+
 </style>
 
 <div><center>
@@ -68,6 +113,7 @@
     </div>
     <table>
         <tr>
+            <th>Serial Number</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email ID</th>
@@ -79,18 +125,19 @@
             {% for Users in User_profiles %}
                 {% if not Users.is_superuser %}
                     <tr>
+                        <td class="serial-number">{{ forloop.counter }}</td>
                         <td>{{ Users.first_name }}</td>
                         <td>{{ Users.last_name }}</td>
                         <td>{{ Users.email }}</td>
                         <td>{% if Users.is_active %}
                             <form method="post" action="{% url 'deactivate_user' Users.id %}">
                                 {% csrf_token %}
-                                <button type="submit">Deactivate</button>
+                                <button type="submit" class="deactivate-button">Deactivate</button>
                             </form>
                         {% else %}
                             <form method="post" action="{% url 'activate_user' Users.id %}">
                                 {% csrf_token %}
-                                <button type="submit">Activate</button>
+                                <button type="submit" class="activate-button">Activate</button>
                             </form>
                         {% endif %}
                         
@@ -106,6 +153,26 @@
         </tbody>
         <!-- Add more rows as needed without the "Role" field -->
     </table>
+
+
+    <!-- Pagination links -->
+<div class="pagination">
+    <span class="step-links">
+        {% if User_profiles.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ User_profiles.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ User_profiles.number }} of {{ User_profiles.paginator.num_pages }}.
+        </span>
+
+        {% if User_profiles.has_next %}
+            <a href="?page={{ User_profiles.next_page_number }}">next</a>
+            <a href="?page={{ User_profiles.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
     
         $(document).ready(function () {

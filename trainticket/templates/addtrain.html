@@ -76,29 +76,27 @@
             <input type="text" id="train_number" name ="train_number" required>
 
             <label for="departure_station">Departure Station:</label>
-            <input type="text" id="departure_station" name="departure_station" required>
+            <input type="text" id="departure_station" name="departure_station" required><br>
 
             <label for="departure_time">Departure Time:</label>
-            <input type="text" id="departure_time" name="departure_time" required>
+            <input type="time" id="departure_time" name="departure_time"  required><br>
 
             <label for="arrival_station">Arrival Station:</label>
-            <input type="text" id="arrival_station" name="arrival_station" required>
+            <input type="text" id="arrival_station" name="arrival_station" required><br>
 
             <label for="arrival_time">Arrival Time:</label>
-            <input type="text" id="arrival_time" name="arrival_time" required>
+            <input type="time" id="arrival_time" name="arrival_time" required><br>
 
             <label for="duration">Duration:</label>
-            <input type="text" id="duration" name="duration" required>
+            <input type="datetime-local" id="duration" name="duration" required><br>
 
-            <label for="available_classes">Available Classes:</label>
-            <select id="available_classes" name="available_classes" required>
-                <option value="Sleeper">Sleeper</option>
-                <option value="AC 3 Tier">AC 3 Tier</option>
-                <option value="AC 2 Tier">AC 2 Tier</option>
-                <option value="IInd class">IInd class</option>
-                <option value="Ist class">Ist class</option>
-                <!-- Add more options as needed -->
-            </select>
+            <div class="checkbox-group">
+                <label>Available Classes:</label><br>
+                <label><input type="checkbox" name="sleeper"> Sleeper::Number of berths: <input type="number" name="sleeper_berths" min="1" required></label><br>
+                <label><input type="checkbox" name="ac_3_tier"> AC 3 Tier::Number of berths: <input type="number" name="ac_3_tier_berths" min="1" required></label><br>
+                <label><input type="checkbox" name="ac_2_tier"> AC 2 Tier::Number of berths: <input type="number" name="ac_2_tier_berths" min="1" required></label><br>
+                <!-- Add more checkboxes as needed -->
+            </div>
 
             <button type="submit">Add Train</button>
         </form>

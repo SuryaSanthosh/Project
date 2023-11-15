@@ -5,6 +5,7 @@ from .forms import UserProfileForm
 from django.contrib.auth import authenticate ,login as auth_login,logout
 from django.contrib import messages
 
+
 def index(request):
 
     return render(request,'index.html')
@@ -119,7 +120,9 @@ def sbooktrain(request):
     return render(request,'sbooktrain.html')
 
 
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
+from django.shortcuts import render
 def userview(request):
     role_filter = request.GET.get('role')
     users = User.objects.filter(~Q(is_superuser=True))  # Exclude superusers by default
@@ -127,8 +130,21 @@ def userview(request):
     if role_filter:
         users = users.filter(role=role_filter)
 
+    #context = {'User_profiles': users, 'role_filter': role_filter}
+    #return render(request, 'userview.html',context)
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(users, 10)  # Change 10 to the number of users per page you want
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
     context = {'User_profiles': users, 'role_filter': role_filter}
-    return render(request, 'userview.html',context)
+    return render(request, 'userview.html', context)
+
 
 
 from django.db.models import Q

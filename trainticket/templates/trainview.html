@@ -52,6 +52,7 @@
     <table>
         <thead>
             <tr>
+                <th>Serial Number</th>
                 <th>Train Name</th>
                 <th>Train Number</th>
                 <th>Departure Station</th>
@@ -65,6 +66,7 @@
         <tbody>
             {% for train in trains %}
             <tr>
+                <td class="serial-number">{{ forloop.counter }}</td>
                 <td>{{ train.train_name }}</td>
                 <td>{{ train.train_number }}</td>
                 <td>{{ train.departure_station }}</td>
