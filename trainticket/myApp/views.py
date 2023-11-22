@@ -250,7 +250,7 @@ def add_train(request):
         arrival_station = request.POST['arrival_station']
         arrival_time = request.POST['arrival_time']
         duration = request.POST['duration']
-        available_classes = request.POST['available_classes']
+        available_classes = request.POST.getlist['available_classes']
 
         # Create a new Train object and save it to the database
         train = Train(
@@ -295,7 +295,7 @@ def add_station(request):
         form = StationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('station_list')  # Redirect to station list view
+            return redirect('station_list.html')  # Redirect to station list view
     else:
         form = StationForm()
     return render(request, 'add_station.html', {'form': form})
@@ -307,10 +307,64 @@ def myprofile(request):
     return render(request, 'myprofile.html')
 
 
+# views.py
+
+from django.shortcuts import render
+from .models import Train, Station  # Import your Train and Station models
+
+def add_route(request):
+    trains = Train.objects.all()
+    selected_train_id = request.POST.get('train', None)
+
+    if selected_train_id:
+        selected_train = Train.objects.get(id=selected_train_id)
+        departure_stations = selected_train.departure_stations.all()
+        arrival_stations = selected_train.arrival_stations.all()
+    else:
+        departure_stations = []
+        arrival_stations = []
+
+    return render(request, 'add_route.html', {
+        'trains': trains,
+        'selected_train_id': int(selected_train_id) if selected_train_id else None,
+        'departure_stations': departure_stations,
+        'arrival_stations': arrival_stations,
+    })
 
 
 
 
+# myApp/views.py
+
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import Train
+
+def train_search(request):
+    if request.method == 'POST':
+        origin = request.POST.get('origin', '')
+        destination = request.POST.get('destination', '')
+        date = request.POST.get('date', '')
+
+        # Perform your search logic here based on the criteria
+        # For simplicity, let's assume we filter by origin and destination
+        trains = Train.objects.filter(origin__icontains=origin, destination__icontains=destination)
+
+        # Convert train objects to a list of dictionaries for JSON response
+        train_list = [
+            {
+                'name': train.name,
+                'origin': train.origin,
+                'destination': train.destination,
+                'departureTime': train.departure_time.strftime('%H:%M'),
+                'arrivalTime': train.arrival_time.strftime('%H:%M'),
+            }
+            for train in trains
+        ]
+
+        return JsonResponse({'trains': train_list})
+
+    return render(request, 'train_search.html')
 
 
 

@@ -57,6 +57,17 @@ class Station(models.Model):
     
 
 
+from django.db import models
+class Route(models.Model):
+    train = models.ForeignKey(Train, on_delete=models.CASCADE)
+    departure_station = models.ForeignKey(Station, on_delete=models.CASCADE, related_name='departure_routes')
+    arrival_station = models.ForeignKey(Station, on_delete=models.CASCADE, related_name='arrival_routes')
+    intermediate_stations = models.TextField()  # You might want to use a different field type based on your requirements
+    # Add other route-related fields as needed
+    departure_time = models.DateTimeField()  # Add this line
+    arrival_time = models.DateTimeField()
+
+
 
 
 

@@ -25,3 +25,16 @@ class StationForm(forms.ModelForm):
     class Meta:
         model = Station
         fields = ['station_name', 'code']
+
+
+from django import forms
+from .models import Route
+
+class RouteForm(forms.ModelForm):
+    class Meta:
+        model = Route
+        fields = ['train', 'departure_station', 'arrival_station', 'intermediate_stations', 'departure_time', 'arrival_time']
+        
+        widgets = {
+            'intermediate_stations': forms.Textarea(attrs={'rows': 3}),  # Adjust the widget as needed
+        }

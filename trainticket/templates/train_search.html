@@ -1,0 +1,141 @@
+<!-- myApp/templates/search.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static '/img/favicon.png' %}" rel="icon">
+  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i'  %}" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+  <script src="{% static '/js/main.js' %}"></script>
+
+  <!-- Template Main CSS File -->
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Day -> Online Train ticket booking system
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Search</title>
+    <!-- Include any additional styles or scripts here -->
+</head>
+<body>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="index.html">RAILYATHRA</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+            {% if user.is_authenticated %} 
+             <li class="nav-item">
+                <a class="nav-link"> Welcome, {{ user.username }}</a>
+             </li>         
+            {%endif%}
+          <li><a class="nav-link scrollto active" href="{% url 'user_list' %}">Home</a></li>
+        
+          <li><a class="nav-link scrollto" href="{% url 'handlelogout' %}"  id= "logout-link" class="btn btn-primary">LOGOUT</a></li>
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+<div class="container">
+    <h1>Train Search</h1>
+
+    <div id="search-container">
+        <form id="search-form">
+            {% csrf_token %}
+            <label for="origin">Origin:</label>
+            <input type="text" id="origin" name="origin" placeholder="Enter origin" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" placeholder="Enter destination" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date">
+
+            <button type="button" onclick="searchTrains()">Search Trains</button>
+        </form>
+    </div>
+
+    <div id="results-container">
+        <!-- Results will be displayed here dynamically -->
+    </div>
+</div>
+
+<script>
+    function searchTrains() {
+        var form = document.getElementById('search-form');
+        var formData = new FormData(form);
+
+        // Use fetch or another AJAX method to send the form data to the server
+        fetch('/train_search/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => displayResults(data.trains))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function displayResults(trains) {
+        var resultsContainer = document.getElementById('results-container');
+        resultsContainer.innerHTML = '';
+
+        if (trains.length === 0) {
+            resultsContainer.innerHTML = '<p>No trains found for the given criteria.</p>';
+            return;
+        }
+
+        var table = '<table border="1"><tr><th>Train Name</th><th>Origin</th><th>Destination</th><th>Departure Time</th><th>Arrival Time</th></tr>';
+
+        for (var i = 0; i < trains.length; i++) {
+            table += '<tr>';
+            table += '<td>' + trains[i].name + '</td>';
+            table += '<td>' + trains[i].origin + '</td>';
+            table += '<td>' + trains[i].destination + '</td>';
+            table += '<td>' + trains[i].departureTime + '</td>';
+            table += '<td>' + trains[i].arrivalTime + '</td>';
+            table += '</tr>';
+        }
+
+        table += '</table>';
+        resultsContainer.innerHTML = table;
+    }
+</script>
+
+</body>
+</html>

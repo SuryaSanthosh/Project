@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ... (your existing head content) ... -->
+</head>
+<body>
+
+<div class="container">
+    <h1>Add New Route</h1>
+    <form method="post" action="{% url 'add_route' %}">
+        {% csrf_token %}
+
+        <label for="train">Select Train:</label>
+        <select id="train" name="train" required onchange="this.form.submit()">
+            <!-- Add options dynamically based on your trains -->
+            {% for train in trains %}
+                <option value="{{ train.id }}" {% if selected_train_id == train.id %}selected{% endif %}>
+                    {{ train.train_number }} - {{ train.train_name }}
+                </option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="departure_station">Departure Station:</label>
+        <select id="departure_station" name="departure_station" required>
+            <!-- Options will be updated dynamically via Django template logic -->
+            {% for station in departure_stations %}
+                <option value="{{ station.id }}">{{ station.name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="arrival_station">Arrival Station:</label>
+        <select id="arrival_station" name="arrival_station" required>
+            <!-- Options will be updated dynamically via Django template logic -->
+            {% for station in arrival_stations %}
+                <option value="{{ station.id }}">{{ station.name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="route_stations">Intermediate Stations (comma-separated):</label>
+        <input type="text" id="route_stations" name="route_stations" placeholder="Station1, Station2, Station3, ..." required>
+
+        <!-- Add other route-related fields as needed -->
+
+        <button type="submit">Add Route</button>
+    </form>
+</div>
+
+</body>
+</html>
