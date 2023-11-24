@@ -24,7 +24,7 @@
         <select id="departure_station" name="departure_station" required>
             <!-- Options will be updated dynamically via Django template logic -->
             {% for station in departure_stations %}
-                <option value="{{ station.id }}">{{ station.name }}</option>
+                <option value="{{ train.id }}">{{ train.departure_station }}</option>
             {% endfor %}
         </select><br><br>
 
