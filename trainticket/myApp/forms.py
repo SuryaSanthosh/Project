@@ -33,8 +33,4 @@ from .models import Route
 class RouteForm(forms.ModelForm):
     class Meta:
         model = Route
-        fields = ['train', 'departure_station', 'arrival_station', 'intermediate_stations', 'departure_time', 'arrival_time']
-        
-        widgets = {
-            'intermediate_stations': forms.Textarea(attrs={'rows': 3}),  # Adjust the widget as needed
-        }
+        fields = ['destination_station', 'arrival_station', 'route_stations', 'fare_amounts']

@@ -308,28 +308,43 @@ def myprofile(request):
 
 
 # views.py
-
-from django.shortcuts import render
-from .models import Train, Station  # Import your Train and Station models
+from django.shortcuts import render, redirect
+from .models import Route, RouteDetails
+from .forms import RouteForm
 
 def add_route(request):
-    trains = Train.objects.all()
-    selected_train_id = request.POST.get('train', None)
+    if request.method == 'POST':
+        form = RouteForm(request.POST)
+        if form.is_valid():
+            destination_station = form.cleaned_data['destination_station']
+            arrival_station = form.cleaned_data['arrival_station']
 
-    if selected_train_id:
-        selected_train = Train.objects.get(id=selected_train_id)
-        departure_stations = selected_train.departure_stations.all()
-        arrival_stations = selected_train.arrival_stations.all()
+            route = Route.objects.create(destination_station=destination_station, arrival_station=arrival_station)
+
+            route_stations = request.POST.getlist('route_stations[]')
+            fare_amounts = request.POST.getlist('fare_amounts[]')
+
+            for i in range(len(route_stations)):
+                station_name = route_stations[i]
+                fare_amount = fare_amounts[i]
+                RouteDetails.objects.create(route=route, station_name=station_name, fare_amount=fare_amount)
+
+            return redirect('diplay_route')  # You can replace 'success' with the URL you want to redirect to after successfully adding the route
     else:
-        departure_stations = []
-        arrival_stations = []
+        form = RouteForm()
 
-    return render(request, 'add_route.html', {
-        'trains': trains,
-        'selected_train_id': int(selected_train_id) if selected_train_id else None,
-        'departure_stations': departure_stations,
-        'arrival_stations': arrival_stations,
-    })
+    return render(request, 'add_route.html', {'form': form})
+
+# views.py
+from django.shortcuts import render
+from .models import Route
+
+def display_routes(request):
+    # Retrieve all routes from the database
+    routes = Route.objects.all()
+    
+    # Render the template with the retrieved routes
+    return render(request, 'display_route.html', {'routes': routes})
 
 
 

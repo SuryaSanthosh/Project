@@ -1,0 +1,17 @@
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Added Routes</h1>
+    {% for route in routes %}
+        <p>Destination Station: {{ route.destination_station }}</p>
+        <p>Arrival Station: {{ route.arrival_station }}</p>
+        <p>Routes:</p>
+        <ul>
+            {% for station, fare in route.get_routes %}
+                <li>{{ station }} - {{ fare }} Rupees</li>
+            {% endfor %}
+        </ul>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

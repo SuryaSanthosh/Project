@@ -1,5 +1,6 @@
 from . import views
 from django.urls import path
+from .views import add_route 
 from django.contrib.auth import views as auth_views
 
 urlpatterns=[
@@ -27,12 +28,10 @@ urlpatterns=[
     path('addtrain/', views.add_train, name='addtrain'),
     path('trainview/', views.trainview, name='trainview'),
     path('myprofile',views.myprofile,name='myprofile'),
-
-
-
     path('add_station/', views.add_station, name='add_station'),
     path('station_list/', views.station_list, name='station_list'),
     path('add_route/', views.add_route, name='add_route'),
     path('train_search/', views.train_search, name='train_search'),
+    path('display_route/', views.display_routes, name='display_routes'),
 ]
 
