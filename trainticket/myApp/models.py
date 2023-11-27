@@ -62,8 +62,12 @@ from django.db import models
 class Route(models.Model):
     destination_station = models.CharField(max_length=255, default='')
     arrival_station = models.CharField(max_length=255)
-    route_stations = models.JSONField()
+    route_stations = models.CharField(max_length=100)
+    departure_time = models.DateTimeField()
     fare_amounts = models.JSONField()
+
+    def __str__(self):
+        return f'{self.departure_station} to {self.arrival_station}'
 class RouteDetails(models.Model):
     route = models.ForeignKey(Route, on_delete=models.CASCADE)
     station_name = models.CharField(max_length=255)

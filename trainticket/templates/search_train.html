@@ -1,0 +1,27 @@
+
+
+
+
+{% block content %}
+<div class="container">
+    <h1>Search for a Train</h1>
+    <form method="post" action="{% url 'search_train' %}">
+        {% csrf_token %}
+        <label for="date">Select Date:</label>
+        <input type="date" name="date" required>
+        <label for="departure_station">Departure Station:</label>
+        <input type="text" name="departure_station" required>
+        <label for="arrival_station">Arrival Station:</label>
+        <input type="text" name="arrival_station" required>
+        <button type="submit">Search</button>
+    </form>
+    <hr>
+    <h1>Search Results</h1>
+    {% for route in routes %}
+        <p>Departure Station: {{ route.departure_station }}</p>
+        <p>Arrival Station: {{ route.arrival_station }}</p>
+        <p>Departure Time: {{ route.departure_time }}</p>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -384,4 +384,35 @@ def train_search(request):
 
 
 
+# views.py
+from django.shortcuts import render
+from django.db.models import Q
+from datetime import datetime
+from .models import Route
+
+def search_train(request):
+    if request.method == 'POST':
+        selected_date = request.POST.get('date')
+        departure_station = request.POST.get('departure_station')
+        arrival_station = request.POST.get('arrival_station')
+
+        try:
+            selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date()
+            # Filter routes based on the selected date, departure station, and arrival station
+            routes = Route.objects.filter(
+                Q(departure_station__icontains=departure_station) &
+                Q(arrival_station__icontains=arrival_station) &
+                Q(departure_time__date=selected_date)
+            )
+        except ValueError:
+            # Handle invalid date format
+            routes = Route.objects.all()
+    else:
+        routes = Route.objects.all()
+
+    return render(request, 'search_train.html', {'routes': routes})
+
+
+
+
 

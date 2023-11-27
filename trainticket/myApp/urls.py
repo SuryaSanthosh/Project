@@ -33,5 +33,6 @@ urlpatterns=[
     path('add_route/', views.add_route, name='add_route'),
     path('train_search/', views.train_search, name='train_search'),
     path('display_route/', views.display_routes, name='display_routes'),
+    path('search_train/', views.search_train, name='search_train'),
 ]
 
