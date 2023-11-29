@@ -3,40 +3,8 @@
 <html lang="en">
 <head>
   <!-- ... (your existing head content) ... -->
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Bootstrap Template - Index</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{% static '/img/favicon.png' %}" rel="icon">
-  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i'  %}" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
   <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static '/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-  <link href="{% static '/css/style.css' %}" rel="stylesheet">
-  <script src="{% static '/js/main.js' %}"></script>
 
-  <!-- Template Main CSS File -->
-  <link href="{% static '/css/style.css' %}" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Day -> Online Train ticket booking system
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -57,28 +25,6 @@
       font-size: 32px;
     }
 
-    header nav {
-      margin-top: 20px;
-    }
-
-    header nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
-    }
-
-    header nav ul li {
-      margin-right: 20px;
-    }
-
-    header nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
     .container {
       max-width: 800px;
       margin: 20px auto;
@@ -86,11 +32,6 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
     }
 
     form {
@@ -104,15 +45,6 @@
 
     input, select, button {
       margin-bottom: 16px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    .routes-container {
-      display: flex;
-      flex-direction: column;
     }
 
     .route-entry {
@@ -120,90 +52,95 @@
       margin-bottom: 8px;
     }
 
-    .route-entry input {
-      flex: 1;
-    }
-
     .add-route, .remove-route {
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+    h2 {
       text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .add-route {
-      background-color: #4caf50;
-    }
-
-    .remove-route {
-      background-color: #f44336;
-    }
-
-    button[type="submit"] {
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
+      color: #007bff;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  
+  <header>
+    <h1>Add New Route</h1>
+  </header>
 
   <div class="container">
-    <h1>Add New Route</h1>
     <form method="post" action="{% url 'add_route' %}">
-        {% csrf_token %}
+      {% csrf_token %}
 
-        <label for="destination_station">Destination Station:</label>
-        <input type="text" id="destination_station" name="destination_station" required>
+      <div class="mb-3">
+        <label for="departure_time" class="form-label">Departure Time:</label>
+        <input type="time" class="form-control" id="departure_time" name="departure_time" required>
+      </div>
 
-        <div class="routes-container" id="routes-container">
-            <label for="route_stations">Routes:</label>
-            <div class="route-entry">
-                <input type="text" class="route-station" name="route_stations[]" placeholder="Station1" required>
-                <input type="number" class="fare-amount" name="fare_amounts[]" placeholder="Fare" min="0" pattern="^[1-9]\d*$" title="Please enter a positive integer value (in rupees)" required>
+      <div class="mb-3">
+        <label for="destination_station" class="form-label">Destination Station:</label>
+        <input type="text" class="form-control" id="destination_station" name="destination_station" required>
+      </div>
 
-                <button type="button" class="add-route">+</button>
-            </div>
+      <div class="routes-container" id="routes-container">
+        <label for="route_stations" class="form-label">Routes:</label>
+        <div class="route-entry">
+          <input type="text" class="form-control route-station" name="route_stations[]" placeholder="Station1" required>
+          <input type="time" class="form-control departure-time" name="departure_times[]" required>
+          <input type="number" class="form-control fare-amount" name="fare_amounts[]" placeholder="Fare" min="0" pattern="^[1-9]\d*$" title="Please enter a positive integer value (in rupees)" required>
+          <button type="button" class="btn btn-success add-route">+</button>
         </div>
+      </div>
 
-        <label for="arrival_station">Arrival Station:</label>
-        <input type="text" id="arrival_station" name="arrival_station" required>
+      <div class="mb-3">
+        <label for="arrival_station" class="form-label">Arrival Station:</label>
+        <input type="text" class="form-control" id="arrival_station" name="arrival_station" required>
+      </div>
 
-        <!-- Add other route-related fields as needed -->
+      <h2 id="total-fare" class="text-primary">Total Fare: 0</h2>
 
-        <button type="submit">Add Route</button>
+      <button type="submit" class="btn btn-primary">Add Route</button>
     </form>
   </div>
 
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector('.add-route').addEventListener('click', addRouteField);
+      document.querySelector('.add-route').addEventListener('click', addRouteField);
     });
 
     function addRouteField() {
-        const routesContainer = document.getElementById('routes-container');
-        const routeEntry = document.createElement('div');
-        routeEntry.classList.add('route-entry');
-        routeEntry.innerHTML = `
-            <input type="text" class="route-station" name="route_stations[]" placeholder="Next Station" required>
-            <input type="number" class="fare-amount" name="fare_amounts[]" placeholder="Fare" required>
-            <button type="button" class="remove-route">-</button>
-        `;
-        routesContainer.appendChild(routeEntry);
+      const routesContainer = document.getElementById('routes-container');
+      const routeEntry = document.createElement('div');
+      routeEntry.classList.add('route-entry', 'mb-3');
+      routeEntry.innerHTML = `
+        <input type="text" class="form-control route-station" name="route_stations[]" placeholder="Next Station" required>
+        <input type="time" class="form-control departure-time" name="departure_times[]" required>
+        <input type="number" class="form-control fare-amount" name="fare_amounts[]" placeholder="Fare" required>
+        <button type="button" class="btn btn-danger remove-route">-</button>
+      `;
+      routesContainer.appendChild(routeEntry);
 
-        // Attach event listener to the new remove button
-        routeEntry.querySelector('.remove-route').addEventListener('click', function() {
-            routesContainer.removeChild(routeEntry);
-        });
+      // Attach event listener to the new remove button
+      routeEntry.querySelector('.remove-route').addEventListener('click', function() {
+        routesContainer.removeChild(routeEntry);
+        updateTotalFare();
+      });
+
+      // Update total fare when a new route is added
+      updateTotalFare();
+    }
+
+    function updateTotalFare() {
+      const fareInputs = document.querySelectorAll('.fare-amount');
+      let totalFare = 0;
+      fareInputs.forEach(input => {
+        totalFare += parseInt(input.value) || 0;
+      });
+
+      // Display the total fare in the heading
+      document.getElementById('total-fare').textContent = `Total Fare: ${totalFare}`;
     }
   </script>
 

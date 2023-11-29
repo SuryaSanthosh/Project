@@ -329,7 +329,7 @@ def add_route(request):
                 fare_amount = fare_amounts[i]
                 RouteDetails.objects.create(route=route, station_name=station_name, fare_amount=fare_amount)
 
-            return redirect('diplay_route')  # You can replace 'success' with the URL you want to redirect to after successfully adding the route
+            return redirect('diplay_route.html')  # You can replace 'success' with the URL you want to redirect to after successfully adding the route
     else:
         form = RouteForm()
 
