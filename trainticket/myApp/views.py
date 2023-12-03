@@ -9,6 +9,11 @@ from django.contrib import messages
 def index(request):
 
     return render(request,'index.html')
+def user_index(request):
+
+    return render(request,'user_index.html')
+
+
 
 
 
@@ -329,7 +334,7 @@ def add_route(request):
                 fare_amount = fare_amounts[i]
                 RouteDetails.objects.create(route=route, station_name=station_name, fare_amount=fare_amount)
 
-            return redirect('diplay_route.html')  # You can replace 'success' with the URL you want to redirect to after successfully adding the route
+            return redirect('add_route.html')  # You can replace 'success' with the URL you want to redirect to after successfully adding the route
     else:
         form = RouteForm()
 
@@ -339,12 +344,27 @@ def add_route(request):
 from django.shortcuts import render
 from .models import Route
 
-def display_routes(request):
-    # Retrieve all routes from the database
-    routes = Route.objects.all()
-    
-    # Render the template with the retrieved routes
-    return render(request, 'display_route.html', {'routes': routes})
+def display_route(request):
+    # Replace the following lines with your actual data retrieval logic
+    departure_time = "Your Departure Time"
+    destination_station = "Your Destination Station"
+    route_stations = ["Station1", "Station2", "Station3"]
+    departure_times = ["Time1", "Time2", "Time3"]
+    fare_amounts = ["Fare1", "Fare2", "Fare3"]
+    arrival_station = "Your Arrival Station"
+    total_fare = "Your Total Fare"
+
+    context = {
+        'departure_time': departure_time,
+        'destination_station': destination_station,
+        'route_stations': route_stations,
+        'departure_times': departure_times,
+        'fare_amounts': fare_amounts,
+        'arrival_station': arrival_station,
+        'total_fare': total_fare,
+    }
+
+    return render(request, 'display_route.html', context)
 
 
 

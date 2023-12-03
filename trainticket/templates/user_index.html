@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static '/img/favicon.png' %}" rel="icon">
+  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i'  %}" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+  <script src="{% static '/js/main.js' %}"></script>
+
+  <!-- Template Main CSS File -->
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Day -> Online Train ticket booking system
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+
+ 
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+   
+      <h1 class="logo"><a href="index.html">RAILYATHRA</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+            {% if user.is_authenticated %} 
+             <li class="nav-item">
+                <a class="nav-link"> Welcome, {{ user.username }}</a>
+             </li>         
+            {%endif%}
+            <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <li><a class="nav-link scrollto active" href="{% url 'dashboard' %}">Home</a></li>
+        
+          <li><a class="nav-link scrollto" href="{% url 'handlelogout' %}"  id= "logout-link" class="btn btn-primary">LOGOUT</a></li>
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+ 
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+    .common-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+    header {
+        background-color: #14cdee;
+        padding: 20px 0;
+        color: #fff;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 32px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .image-container img {
+        max-width: 30%;
+        height: auto;
+        border-radius: 8px;
+    }
+</style>
+</head>
+</header>
+<br>
+<br>
+  <body>
+  
+ 
+    <div class="image-container">
+        <img src="{% static 'img/img3.jpg' %}" alt="Image 1">
+       
+        <img src="{% static 'img/img2.jpg' %}" alt="Image 1">
+        <img src="{% static 'img/about.jpg' %}" alt="Image 1"><br><br>
+        <a href="search_train" class="btn btn-primary btn-block common-btn">Search Train</a>
+        <a href="edit_profile" class="btn btn-primary btn-block common-btn">Edit Profile</a>
+        <a href="{% url 'submit_feedback' %}" class="btn btn-primary btn-block common-btn">Feedback</a>
+        <a href="{% url 'trainview' %}" class="btn btn-primary btn-block common-btn">Book Trains</a>
+        <a href="schedule" class="btn btn-primary btn-block common-btn">Check Schedule</a>
+    </div>
+</div>
+
+</body>
+</html>

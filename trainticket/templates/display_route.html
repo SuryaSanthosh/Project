@@ -1,49 +1,63 @@
 {% load static %}
 
-{% block content %}
-<div class="container">
-    <h1>Added Routes</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Destination Station</th>
-                <th scope="col">Arrival Station</th>
-                <th scope="col">Routes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for route in routes %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!-- ... (your existing head content) ... -->
+</head>
+<body>
+ <header>
+   <div class="header-buttons">
+     <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back</a>
+     <a href="{% url 'handlelogout' %}" class="btn btn-danger">Logout</a>
+   </div>
+   <h1>Display Routes</h1>
+ </header>
+
+ <div class="container">
+   <table class="table">
+     <thead>
+       <tr>
+         <th>Departure Time</th>
+         <th>Destination Station</th>
+         <th>Routes</th>
+         <th>Arrival Station</th>
+         <th>Total Fare</th>
+       </tr>
+     </thead>
+     <tbody>
+       {% for route in routes %}
+         <tr>
+           <td>{{ route.departure_time }}</td>
+           <td>{{ route.destination_station }}</td>
+           <td>
+             <table class="table">
+               <thead>
                 <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ route.destination_station }}</td>
-                    <td>{{ route.arrival_station }}</td>
-                    <td>
-                        <ul>
-                            {% for station, fare in route.get_routes %}
-                                <li>{{ station }} - {{ fare }} Rupees</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
+                  <th>Station</th>
+                  <th>Departure Time</th>
+                  <th>Fare</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+               </thead>
+               <tbody>
+                {% for station, time, fare in zip(route.route_stations, route.departure_times, route.fare_amounts) %}
+                  <tr>
+                    <td>{{ station }}</td>
+                    <td>{{ time }}</td>
+                    <td>{{ fare }}</td>
+                  </tr>
+                {% endfor %}
+               </tbody>
+             </table>
+           </td>
+           <td>{{ route.arrival_station }}</td>
+           <td>{{ route.total_fare }}</td>
+         </tr>
+       {% endfor %}
+     </tbody>
+   </table>
+ </div>
 
-    <div class="d-flex justify-content-center">
-        <ul class="pagination">
-            {% if routes.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page=1">&laquo;&laquo;</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ routes.previous_page_number }}">{{ routes.previous_page_number }}</a></li>
-            {% endif %}
-
-            <li class="page-item active"><span class="page-link">{{ routes.number }}</span></li>
-
-            {% if routes.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ routes.next_page_number }}">{{ routes.next_page_number }}</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ routes.paginator.num_pages }}">&raquo;&raquo;</a></li>
-            {% endif %}
-        </ul>
-    </div>
-</div>
-{% endblock %}
+ <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

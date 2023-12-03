@@ -32,7 +32,8 @@ urlpatterns=[
     path('station_list/', views.station_list, name='station_list'),
     path('add_route/', views.add_route, name='add_route'),
     path('train_search/', views.train_search, name='train_search'),
-    path('display_route/', views.display_routes, name='display_routes'),
+    path('display_route/', views.display_route, name='display_route'),
     path('search_train/', views.search_train, name='search_train'),
+    path('user_index/', views.user_index, name='user_index'),
 ]
 

@@ -67,7 +67,7 @@ class Route(models.Model):
     fare_amounts = models.JSONField()
 
     def __str__(self):
-        return f'{self.departure_station} to {self.arrival_station}'
+        return f'{self.destination_station} to {self.arrival_station}'
 class RouteDetails(models.Model):
     route = models.ForeignKey(Route, on_delete=models.CASCADE)
     station_name = models.CharField(max_length=255)
