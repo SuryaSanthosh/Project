@@ -255,7 +255,7 @@ def add_train(request):
         arrival_station = request.POST['arrival_station']
         arrival_time = request.POST['arrival_time']
         duration = request.POST['duration']
-        available_classes = request.POST.getlist['available_classes']
+        #available_classes = request.POST.getlist('available_classes')
 
         # Create a new Train object and save it to the database
         train = Train(
@@ -266,12 +266,12 @@ def add_train(request):
             arrival_station=arrival_station,
             arrival_time=arrival_time,
             duration=duration,
-            available_classes=available_classes
+            #available_classes=available_classes
         )
         train.save()
 
         messages.success(request, 'Train added successfully')  # Display a success message
-        return redirect('add_train')  # Redirect to the add_train page to add more trains
+        return redirect('trainview')  # Redirect to the add_train page to add more trains
 
     return render(request, 'addtrain.html')
 
@@ -316,29 +316,30 @@ def myprofile(request):
 from django.shortcuts import render, redirect
 from .models import Route, RouteDetails
 from .forms import RouteForm
-
 def add_route(request):
     if request.method == 'POST':
-        form = RouteForm(request.POST)
-        if form.is_valid():
-            destination_station = form.cleaned_data['destination_station']
-            arrival_station = form.cleaned_data['arrival_station']
+        destination_station = request.POST['destination_station']
+        arrival_station = request.POST['arrival_station']
+        route_stations = request.POST('route_stations','')
+        departure_time = request.POST['departure_time']
+        fare_amounts = request.POST.getlist('fare_amounts[]')
 
-            route = Route.objects.create(destination_station=destination_station, arrival_station=arrival_station)
+        # Create Route instance
+        route = Route.objects.create(
+            destination_station=destination_station,
+            arrival_station=arrival_station,
+            route_stations=route_stations,
+            departure_time=departure_time,
+            fare_amounts=fare_amounts
+        )
 
-            route_stations = request.POST.getlist('route_stations[]')
-            fare_amounts = request.POST.getlist('fare_amounts[]')
+        # Create RouteDetails instances
+        for station, fare in zip(request.POST.getlist('station_name[]'), fare_amounts):
+            RouteDetails.objects.create(route=route, station_name=station, fare_amount=fare)
 
-            for i in range(len(route_stations)):
-                station_name = route_stations[i]
-                fare_amount = fare_amounts[i]
-                RouteDetails.objects.create(route=route, station_name=station_name, fare_amount=fare_amount)
+        return redirect('display_routes')
 
-            return redirect('add_route.html')  # You can replace 'success' with the URL you want to redirect to after successfully adding the route
-    else:
-        form = RouteForm()
-
-    return render(request, 'add_route.html', {'form': form})
+    return render(request, 'add_route.html')
 
 # views.py
 from django.shortcuts import render

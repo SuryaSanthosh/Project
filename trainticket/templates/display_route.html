@@ -25,36 +25,36 @@
          <th>Total Fare</th>
        </tr>
      </thead>
-     <tbody>
-       {% for route in routes %}
-         <tr>
-           <td>{{ route.departure_time }}</td>
-           <td>{{ route.destination_station }}</td>
-           <td>
-             <table class="table">
-               <thead>
-                <tr>
-                  <th>Station</th>
-                  <th>Departure Time</th>
-                  <th>Fare</th>
-                </tr>
-               </thead>
-               <tbody>
-                {% for station, time, fare in zip(route.route_stations, route.departure_times, route.fare_amounts) %}
-                  <tr>
-                    <td>{{ station }}</td>
-                    <td>{{ time }}</td>
-                    <td>{{ fare }}</td>
-                  </tr>
-                {% endfor %}
-               </tbody>
-             </table>
-           </td>
-           <td>{{ route.arrival_station }}</td>
-           <td>{{ route.total_fare }}</td>
-         </tr>
-       {% endfor %}
-     </tbody>
+     <!-- display_route.html -->
+
+<tbody>
+  {% for route in routes %}
+      <tr>
+          <td>{{ route.departure_time }}</td>
+          <td>{{ route.destination_station }}</td>
+          <td>
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Station</th>
+                          <th>Fare</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for detail in route.routedetails_set.all %}
+                          <tr>
+                              <td>{{ detail.station_name }}</td>
+                              <td>{{ detail.fare_amount }}</td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </td>
+          <td>{{ route.arrival_station }}</td>
+      </tr>
+  {% endfor %}
+</tbody>
+
    </table>
  </div>
 
