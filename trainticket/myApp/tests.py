@@ -1,33 +1,47 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import unittest
 
-# Set up the Chrome WebDriver (replace 'path/to/chromedriver' with the actual path)
-driver = webdriver.Chrome(executable_path='path/to/chromedriver')
+class LoginTest(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome()  # Initialize your WebDriver
+        self.driver.get("http://127.0.0.1:8000/login/")  # Replace with your login page URL
 
-# Navigate to the login page
-driver.get('http://127.0.0.1:8000/login/')  # Replace with the actual URL
+    def test_valid_login(self):
+        username = "sooraj"
+        password = "sooraj"
 
-# Find the username and password input fields
-username_input = driver.find_element_by_name('username')
-password_input = driver.find_element_by_name('password')
+        # Find username and password fields
+        username_field = WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((By.ID, "username"))  # Update with your username field locator
+        )
+        password_field = WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((By.ID, "password"))  # Update with your password field locator
+        )
 
-# Input valid or invalid credentials
-username_input.send_keys('sooraj')
-password_input.send_keys('sooraj')
+        # Enter username and password
+        username_field.send_keys(username)
+        password_field.send_keys(password)
 
-# Submit the form
-password_input.send_keys(Keys.RETURN)
+        # Trigger change events after entering username and password
+        self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'))", username_field)
+        self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'))", password_field)
 
-# Wait for a moment to allow the page to load (you might need to adjust the sleep duration)
-time.sleep(2)
+        # Find and click the login button
+        login_button = WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.ID, "login-button"))  # Update with your login button locator
+        )
+        login_button.click()
 
-# Check for successful login or error message
-if 'successful_login_indicator' in driver.current_url:  # Replace with an indicator of successful login
-    print('Login successful!')
-else:
-    error_message = driver.find_element_by_id('error-message').text  # Replace with the actual error message element ID
-    print(f'Login failed. Error message: {error_message}')
+        # Add assertions to verify successful login
+        expected_url = "/home/"
+        self.assertIn(expected_url, self.driver.current_url)  # Update with assertion to check if expected_url is present in the current URL
+    def tearDown(self):
+        self.driver.quit()
 
-# Close the browser
-driver.quit()
+if __name__ == "__main__":
+    # Your main code here
+
+    unittest.main()
