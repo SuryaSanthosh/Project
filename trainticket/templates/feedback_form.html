@@ -2,6 +2,21 @@
 <html>
 <head>
     <title>Submit Feedback</title>
+    <nav id="navbar" class="navbar">
+        <ul>
+            {% if user.is_authenticated %} 
+             <li class="nav-item">
+                <a class="nav-link"> Welcome, {{ user.username }}</a>
+             </li>         
+            {%endif%}
+          <li><a class="nav-link scrollto active" href="{% url 'user_list' %}">Back</a></li>
+          
+        
+          <li><a class="nav-link scrollto" href="{% url 'handlelogout' %}"  id= "logout-link" class="btn btn-primary">LOGOUT</a></li>
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
     <style>
         body {
             font-family: Arial, sans-serif;

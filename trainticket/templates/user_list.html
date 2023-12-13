@@ -166,7 +166,7 @@
     }
   </style>
 
-<body style="background-image:  url('/static/assets/img/img1.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center center;"></body>>
+<body style="background-image:  url('/staticimg/img1.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center center;"></body>>
     
   
    
@@ -200,11 +200,11 @@
                                     <a href="addRT" class="btn btn-primary btn-block">Add Route Station</a>
                                   {% endif %}
                                     <a href="edit_profile" class="btn btn-primary btn-block common-btn">Edit Profile</a>
-                                    <a href="search_train" class="btn btn-primary btn-block common-btn">Search Train</a>
+                                    <a href="{% url 'trainview' %}" class="btn btn-primary btn-block common-btn">Search Train</a>
                                     <a href="{% url 'trainview' %}" class="btn btn-primary btn-block common-btn">Book Trains</a>
-                                    <a href="schedule" class="btn btn-primary btn-block common-btn">Check Schedule</a>
-                                    <a href="pnr" class="btn btn-primary btn-block common-btn">Check PNR</a>
-                                    <a href="cancel" class="btn btn-primary btn-block common-btn">Cancel Seat</a>
+                                    <a href="#schedule" class="btn btn-primary btn-block common-btn">Check Schedule</a>
+                                    <a href="#pnr" class="btn btn-primary btn-block common-btn">Check PNR</a>
+                                    <a href="#cancel" class="btn btn-primary btn-block common-btn">Cancel Seat</a>
                                     <a href="{% url 'submit_feedback' %}" class="btn btn-primary btn-block common-btn">Feedback</a>
                                 </div>
 

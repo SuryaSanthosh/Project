@@ -1,47 +1,51 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import time
 import unittest
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
-class LoginTest(unittest.TestCase):
+class RouteFormSeleniumTest(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome()  # Initialize your WebDriver
-        self.driver.get("http://127.0.0.1:8000/login/")  # Replace with your login page URL
+        # Assuming you have ChromeDriver installed and its executable in the system's PATH
+        self.driver = webdriver.Chrome()
 
-    def test_valid_login(self):
-        username = "sooraj"
-        password = "sooraj"
-
-        # Find username and password fields
-        username_field = WebDriverWait(self.driver, 30).until(
-            EC.presence_of_element_located((By.ID, "username"))  # Update with your username field locator
-        )
-        password_field = WebDriverWait(self.driver, 30).until(
-            EC.presence_of_element_located((By.ID, "password"))  # Update with your password field locator
-        )
-
-        # Enter username and password
-        username_field.send_keys(username)
-        password_field.send_keys(password)
-
-        # Trigger change events after entering username and password
-        self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'))", username_field)
-        self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'))", password_field)
-
-        # Find and click the login button
-        login_button = WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.ID, "login-button"))  # Update with your login button locator
-        )
-        login_button.click()
-
-        # Add assertions to verify successful login
-        expected_url = "/home/"
-        self.assertIn(expected_url, self.driver.current_url)  # Update with assertion to check if expected_url is present in the current URL
     def tearDown(self):
         self.driver.quit()
 
-if __name__ == "__main__":
-    # Your main code here
+    def test_add_route_form(self):
+        # Open the form page
+        self.driver.get("http://127.0.0.1:8000/add_route/")  # Replace with the actual URL of your form
 
+        # Fill in the form fields
+        self.driver.find_element_by_id("departure_time").send_keys("12:00 PM")
+        self.driver.find_element_by_id("destination_station").send_keys("DestinationStation")
+
+        # Add a route entry
+        self.driver.find_element_by_class_name("add-route").click()
+
+        # Wait for the dynamically added input fields to appear
+        time.sleep(1)
+
+        # Fill in the additional route entry fields
+        route_stations = self.driver.find_elements_by_name("route_stations[]")
+        route_stations[-1].send_keys("Station2")
+
+        departure_times = self.driver.find_elements_by_name("departure_times[]")
+        departure_times[-1].send_keys("01:00 PM")
+
+        fare_amounts = self.driver.find_elements_by_name("fare_amounts[]")
+        fare_amounts[-1].send_keys("50")
+
+        # Fill in the remaining form fields
+        self.driver.find_element_by_id("arrival_station").send_keys("ArrivalStation")
+
+        # Submit the form
+        self.driver.find_element_by_css_selector("button.btn-primary").click()
+
+        # Wait for the form to submit (adjust the time as needed)
+        time.sleep(1)
+
+        # Assert that the form submission was successful (modify the assertion as needed)
+        self.assertIn("Success", self.driver.page_source)
+
+if __name__ == "__main__":
     unittest.main()
