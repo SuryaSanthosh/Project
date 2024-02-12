@@ -3,188 +3,41 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  
-    <title>Bootstrap Template - Index</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-  
-    <!-- Favicons -->
-    <link href="{% static '/img/favicon.png' %}" rel="icon">
-    <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-  
-    <!-- Google Fonts -->
-    <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i'  %}" rel="stylesheet">
-  
-    <!-- Vendor CSS Files -->
-    <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
-    <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-    <link href="{% static '/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-    <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-    <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-    <link href="{% static '/css/style.css' %}" rel="stylesheet">
-    <script src="{% static '/js/main.js' %}"></script>
-  
-    <!-- Template Main CSS File -->
-    <link href="{% static '/css/style.css' %}" rel="stylesheet">
-  
-    <!-- =======================================================
-    * Template Name: Day -> Online Train ticket booking system
-    * Updated: Sep 18 2023 with Bootstrap v5.3.2
-    * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
-  
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Train Search</title>
-      <!-- Include any additional styles or scripts here -->
-  
-    <title>Available Trains</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Details</title>
     <style>
+        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            background-color: #f3f3f3;
         }
-
-        h1 {
-            background-color: #333;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            margin: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #444;
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(odd) {
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
             background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
-        .search-container {
-            text-align: center;
-            margin-bottom: 20px;
+        h1 {
+            color: #333;
         }
-
-        .search-input {
-            padding: 8px;
-            width: 200px;
+        p {
+            color: #666;
         }
     </style>
 </head>
 <body>
-    
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <h1 class="logo"><a href="index.html">RAILYATHRA</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-            {% if user.is_authenticated %} 
-             <li class="nav-item">
-                <a class="nav-link"> Welcome, {{ user.username }}</a>
-             </li>         
-            {%endif%}
-          <li><a class="nav-link scrollto active" href="{% url 'user_list' %}">Home</a></li>
-        
-          <li><a class="nav-link scrollto" href="{% url 'handlelogout' %}"  id= "logout-link" class="btn btn-primary">LOGOUT</a></li>
-          
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+    <div class="container">
+        <h1>Train Details</h1>
+        <p><strong>Train ID:</strong> {{ train.train_id }}</p>
+        <p><strong>Train Name:</strong> {{ train.train_name }}</p>
+        <!-- Add other train details here -->
     </div>
-  </header><!-- End Header -->
-    <div class="search-container">
-        <label for="search">Search Train:</label>
-        <input type="text" id="search" class="search-input" oninput="searchTrains()" placeholder="Enter train name or number">
-    </div>
-
-    <h1>Available Trains</h1>
-    <table id="trainTable">
-        <thead>
-            <tr>
-                <th>Serial Number</th>
-                <th>Train Name</th>
-                <th>Train Number</th>
-                <th>Departure Station</th>
-                <th>Departure Time</th>
-                <th>Arrival Station</th>
-                <th>Arrival Time</th>
-                <th>Duration</th>
-                <th>Available Classes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for train in trains %}
-            <tr>
-                <td class="serial-number">{{ forloop.counter }}</td>
-                <td>{{ train.train_name }}</td>
-                <td>{{ train.train_number }}</td>
-                <td>{{ train.departure_station }}</td>
-                <td>{{ train.departure_time }}</td>
-                <td>{{ train.arrival_station }}</td>
-                <td>{{ train.arrival_time }}</td>
-                <td>{{ train.duration }}</td>
-                <td>{{ train.available_classes }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <script>
-        function searchTrains() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("search");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("trainTable");
-            tr = table.getElementsByTagName("tr");
-
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1]; // Change index based on the column you want to search
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>
 </body>
 </html>

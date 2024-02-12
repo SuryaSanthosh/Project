@@ -142,3 +142,8 @@ SEESION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_COOKIE_NAME = "sessionid"
 SESSION_COOKIE_AGE = 600
 LOGIN_URL = 'login'
+
+
+
+# settings.py
+APPEND_SLASH = False

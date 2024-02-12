@@ -37,6 +37,14 @@ urlpatterns=[
     path('user_index/', views.user_index, name='user_index'),
     path('seat_selection/', views.seat_selection, name='seat_selection'),
     path('details/', views.details, name='details'),
+    path('addtrain/', views.trainview, name='add_train'),  # Define URL pattern for add_train view
+
+
+
+
+
+
+
 
 
 ]

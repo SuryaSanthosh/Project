@@ -1,183 +1,88 @@
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Railyathra - Add Train</title>
+    <title>Add Train</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('/static/img/1.jpg');
+            font-family: Arial, sans-serif;
+            background-image: url('background_image.jpg'); /* Add your background image URL here */
             background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
+            background-position: center;
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000; /* Ensure the header stays on top of other elements */
-        }
-        .header h1 {
-            margin: 0;
-        }
-        .header-buttons {
-            display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: center;
         }
-        .header-buttons button {
-            margin-left: 10px;
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .header-buttons button:hover {
-            background-color: #0056b3;
-        }
+        
         .container {
-            max-width: 800px;
-            margin: 70px auto 20px; /* Adjust margin to push content below the fixed header */
+            background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            width: 400px;
         }
+        
         h2 {
             text-align: center;
-            margin-bottom: 30px;
+            color: #333;
         }
+        
         form {
-            margin-bottom: 20px;
+            text-align: center;
         }
+        
         label {
-            display: block;
-            margin-bottom: 5px;
+            font-weight: bold;
         }
-        input[type="text"],
-        input[type="date"],
-        input[type="time"] {
-            width: calc(100% - 12px);
-            padding: 6px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
             border-radius: 4px;
         }
-        #map-canvas {
-            width: 100%;
-            height: 300px;
-            margin-bottom: 20px;
-        }
+        
         input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
             padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
+        
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Railyathra</h1>
-        <div class="header-buttons">
-            <button onclick="location.href='{% url "dashboard" %}'">Home</button>
-            <button onclick="location.href='help.html'">Help</button>
-            <button onclick="location.href='{% url "handlelogout" %}'">Logout</button>
-        </div>
-    </div>
     <div class="container">
         <h2>Add Train</h2>
-        <form action="{% url 'addtrain' %}" method="post">
-            {% csrf_token %}
-            <label for="id_train_id">Train ID:</label>
-            <input type="text" id="id_train_id" name="train_id" required><br>
-            <label for="id_name"> Train Name:</label>
-            <input type="text" id="id_name" name="name" required><br>
-            <label for="id_start_date">Departure Date:</label>
-            <input type="date" id="id_start_date" name="start_date" required><br>
-            <label for="id_start_time">Departure Time:</label>
-            <input type="time" id="id_start_time" name="start_time" required><br>
-            <label for="id_start_station">Departure Station:</label>
-            <input type="text" id="id_start_station" name="start_station" required><br>
-            <label for="id_destination_station">Arrival Station:</label>
-            <input type="text" id="id_destination_station" name="destination_station" required><br>
-            <label for="id_destination_date">Destination Date:</label>
-            <input type="date" id="id_destination_date" name="destination_date" required><br>
-            <label for="id_destination_time">Destination Time:</label>
-            <input type="time" id="id_destination_time" name="destination_time" required><br>
-            <input type="hidden" id="id_departure_latitude" name="departure_latitude">
-            <input type="hidden" id="id_departure_longitude" name="departure_longitude">
-            <input type="hidden" id="id_arrival_latitude" name="arrival_latitude">
-            <input type="hidden" id="id_arrival_longitude" name="arrival_longitude">
-            <div id="map-canvas"></div>
-            <input type="submit"  value="Submit" style="display: block; margin: 0 auto;">
+        <form action="/addtrain" method="POST">
+            <label for="train_id">Train ID:</label><br>
+            <input type="text" id="train_id" name="train_id"><br><br>
+
+            <label for="train_name">Train Name:</label><br>
+            <input type="text" id="train_name" name="train_name"><br><br>
+
+            <label for="days_of_week">Days of Week:</label><br>
+            <input type="text" id="days_of_week" name="days_of_week"><br><br>
+
+            <label for="departure_station">Departure Station:</label><br>
+            <input type="text" id="departure_station" name="departure_station"><br><br>
+
+            <label for="route">Route:</label><br>
+            <textarea id="route" name="route" rows="4" cols="50"></textarea><br><br>
+
+            <input type="submit" value="Submit">
         </form>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmY6QLgOQq0aQZSeANTHhkff3XUYdj54U"></script>
-    <script>
-        var map;
-        var departureMarker;
-        var arrivalMarker;
-
-        function initialize() {
-            var mapOptions = {
-                center: { lat: 0, lng: 0 },
-                zoom: 2
-            };
-            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            
-            // Add event listeners for clicks on the map
-            google.maps.event.addListener(map, 'click', function(event) {
-                if (!departureMarker) {
-                    // If departure marker is not set, set it
-                    departureMarker = addMarker(event.latLng);
-                    document.getElementById('id_departure_latitude').value = event.latLng.lat();
-                    document.getElementById('id_departure_longitude').value = event.latLng.lng();
-                } else if (!arrivalMarker) {
-                    // If departure marker is set but arrival marker is not set, set arrival marker
-                    arrivalMarker = addMarker(event.latLng);
-                    document.getElementById('id_arrival_latitude').value = event.latLng.lat();
-                    document.getElementById('id_arrival_longitude').value = event.latLng.lng();
-                    
-                    // Draw a route between departure and arrival stations
-                    drawRoute(departureMarker.getPosition(), arrivalMarker.getPosition());
-                } else {
-                    // If both markers are set, clear markers and redraw
-                    clearMarkers();
-                    initialize();
-                }
-            });
-        }
-
-        function addMarker(location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-            return marker;
-        }
-
-        function clearMarkers()
+</body>
+</html>

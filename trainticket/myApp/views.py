@@ -433,10 +433,6 @@ def search_train(request):
 
     return render(request, 'search_train.html', {'routes': routes})
 
-
-
-
-
 from django.shortcuts import render
 
 def seat_selection(request):
@@ -450,3 +446,9 @@ def details(request):
     selected_seats = request.GET.get('seats')
     num_seats = len(selected_seats.split(',')) if selected_seats else 0
     return render(request, 'details.html', {'selected_seats': selected_seats, 'num_seats': num_seats})
+
+
+
+
+
+
