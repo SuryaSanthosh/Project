@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/img/1.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* Ensure the header stays on top of other elements */
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .header-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .header-buttons button {
+            margin-left: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .header-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 70px auto 20px; /* Adjust margin to push content below the fixed header */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .seats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .seat {
+            width: 70px; /* Adjusted width for 10 seats in a row */
+            height: 50px;
+            margin: 5px;
+            background-color: #ccc;
+            border: none;
+            cursor: pointer;
+        }
+        .selected {
+            background-color: green;
+        }
+        .spacer {
+            height: 20px; /* Adjust the height as needed */
+            width: 100%;
+        }
+        #nextButton {
+            margin: 20px auto;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+        }
+        #nextButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Railyathra</h1>
+        <div class="header-buttons">
+            <button onclick="location.href='{% url "dashboard" %}'">Home</button>
+            <button onclick="location.href='help.html'">Help</button>
+            <button onclick="location.href='{% url "handlelogout" %}'">Logout</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="section">
+            <h1>Seat Selection</h1>
+            <h2>Select Class</h2>
+            <form id="class-selection-form">
+                <label for="class">Select Class:</label>
+                <select name="class" id="class">
+                    <option value="first_class">First Class (FC)</option>
+                    <option value="second_class">Second Class (2S)</option>
+                    <option value="ac_chair_class">AC Chair  Class (CC)</option>
+                    <option value="sleeper_class">Sleeper Class (SL)</option>
+                    <option value="general_class">Unreserved/Generak Class (2S)</option>
+                    <option value="executive_chair_class">Air-Conditioned Executive Chair Class (EC)</option>
+                    <option value="ac_first_class">Air-Conditioned First Class (1AC)</option>
+                    <option value="ac_second_class">Air-Conditioned Two-Tier Class (2AC)</option>
+                    <option value="ac_third_class">Air-Conditioned Three-Tier Class (3AC)</option>
+                </select>
+            </form>
+        </div>
+        <div class="section">
+            <h2>Seat Selection</h2>
+            <div class="seats-container">
+                <!-- Generate seats dynamically using Django template -->
+                {% for seat in available_seats %}
+                    <button class="seat" id="seat{{ forloop.counter }}" onclick="selectSeat({{ forloop.counter }})">{{ seat }}</button>
+                    {% if forloop.counter == 20 %}
+                        <div class="spacer"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <button id="nextButton" onclick="redirectToDetails()">Next</button>
+
+    <script>
+        function selectSeat(seatNumber) {
+            var seat = document.getElementById('seat' + seatNumber);
+            seat.classList.toggle('selected');
+        }
+
+        function redirectToDetails() {
+            // Array to store selected seat numbers
+            var selectedSeats = [];
+
+            // Loop through all seats to check for selection
+            var seats = document.querySelectorAll('.seat');
+            seats.forEach(function(seat) {
+                if (seat.classList.contains('selected')) {
+                    // Extract seat number from seat ID
+                    var seatNumber = seat.id.replace('seat', '');
+                    selectedSeats.push(seatNumber);
+                }
+            });
+
+            // Redirect to details page with selected seat numbers as URL parameters
+            var selectedSeatNumbers = selectedSeats.join(',');
+            window.location.href = '/details?seats=' + selectedSeatNumbers;
+        }
+    </script>
+</body>
+</html>

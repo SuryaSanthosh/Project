@@ -35,5 +35,9 @@ urlpatterns=[
     path('display_route/', views.display_route, name='display_route'),
     path('search_train/', views.search_train, name='search_train'),
     path('user_index/', views.user_index, name='user_index'),
+    path('seat_selection/', views.seat_selection, name='seat_selection'),
+    path('details/', views.details, name='details'),
+
+
 ]
 

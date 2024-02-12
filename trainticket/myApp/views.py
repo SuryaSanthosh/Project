@@ -437,3 +437,16 @@ def search_train(request):
 
 
 
+from django.shortcuts import render
+
+def seat_selection(request):
+    # Simulated data for available seats (you can replace this with your actual data)
+    available_seats = range(1, 51)  # Assuming 50 seats available
+    
+    return render(request, 'seat_selection.html', {'available_seats': available_seats})
+
+
+def details(request):
+    selected_seats = request.GET.get('seats')
+    num_seats = len(selected_seats.split(',')) if selected_seats else 0
+    return render(request, 'details.html', {'selected_seats': selected_seats, 'num_seats': num_seats})
