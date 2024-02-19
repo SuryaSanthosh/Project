@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <script>
+        
+        var options = {
+            "key": "{{ order.key }}",
+            "amount": "{{ order.amount }}",
+            "currency": "INR",
+            "name": "railyathra",
+            "description": "Payment Description",
+            "order_id": "{{ order.id }}",
+            "handler": function (response){
+                window.location.href = "{% url 'payment_success' %}";
+            },
+            "prefill": {
+                "name": "surya",
+                "email": "sooryasanthosh7@email.com"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp = new Razorpay(options);
+        rzp.open();
+    </script>
+    
+</body>
+</html>

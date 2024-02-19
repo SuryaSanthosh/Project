@@ -31,54 +31,64 @@ class Feedback(models.Model):
 
 
 
-from django.db import models
-class Train(models.Model):
-    train_name = models.CharField(max_length=100)
-    train_number = models.CharField(max_length=10)
-    departure_station = models.CharField(max_length=100)
-    departure_time = models.TimeField()
-    arrival_station = models.CharField(max_length=100)
-    arrival_time = models.TimeField()
-    duration = models.CharField(max_length=20)
-    available_classes = models.CharField(max_length=100)
 
 
 
 
+
+
+# models.py
 
 from django.db import models
 
 class Station(models.Model):
-    station_name = models.CharField(max_length=255)
-    code = models.CharField(max_length=10)
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.station_name
-    
+        return self.name
 
 
 from django.db import models
-
-class Route(models.Model):
-    destination_station = models.CharField(max_length=255, default='')
-    arrival_station = models.CharField(max_length=255)
-    route_stations = models.CharField(max_length=100)
-    departure_time = models.DateTimeField()
-    fare_amounts = models.JSONField()
+from django.utils import timezone
+class Train(models.Model):
+    train_id = models.CharField(max_length=50)  # Add this line
+    train_name = models.CharField(max_length=100)
+    departure_station = models.CharField(max_length=100)
+    departure_time = models.TimeField()
+    arrival_station = models.CharField(max_length=100)
+    arrival_time = models.TimeField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.destination_station} to {self.arrival_station}'
+        return self.train_name
+
+class Route(models.Model):
+    train = models.ForeignKey(Train, on_delete=models.CASCADE, related_name='routes')
+    arrival_station = models.CharField(max_length=100)
+    arrival_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Route for {self.train} to {self.arrival_station}"
+
+# models.py
+
+from django.db import models
+
 class RouteDetails(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
-    station_name = models.CharField(max_length=255)
-    fare_amount = models.PositiveIntegerField()
+    # Define your fields here
+    pass
 
 
+# If you need to store payment-related information in your database,
+# you can create models for it. For example:
 
+from django.db import models
 
+class Payment(models.Model):
+    order_id = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-
-
-
-
-
+    def __str__(self):
+        return self.order_id

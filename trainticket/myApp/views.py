@@ -235,45 +235,35 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
-
-
-
-
-
-
+from django.shortcuts import render, redirect
+from .forms import TrainForm, RouteFormSet
+from .models import Train
+from .models import Route, RouteDetails
 
 from django.shortcuts import render, redirect
 from .models import Train
-from django.contrib import messages
+from .forms import TrainForm
 
 def add_train(request):
     if request.method == 'POST':
-        train_name = request.POST['train_name']
-        train_number = request.POST['train_number']
-        departure_station = request.POST['departure_station']
-        departure_time = request.POST['departure_time']
-        arrival_station = request.POST['arrival_station']
-        arrival_time = request.POST['arrival_time']
-        duration = request.POST['duration']
-        #available_classes = request.POST.getlist('available_classes')
+        form = TrainForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('train_view')
+    else:
+        form = TrainForm()
+    return render(request, 'addtrain.html', {'form': form})
 
-        # Create a new Train object and save it to the database
-        train = Train(
-            train_name=train_name,
-            train_number=train_number,
-            departure_station=departure_station,
-            departure_time=departure_time,
-            arrival_station=arrival_station,
-            arrival_time=arrival_time,
-            duration=duration,
-            #available_classes=available_classes
-        )
-        train.save()
+def train_view(request):
+    trains = Train.objects.all()
+    return render(request, 'trainview.html', {'trains': trains})
 
-        messages.success(request, 'Train added successfully')  # Display a success message
-        return redirect('trainview')  # Redirect to the add_train page to add more trains
 
-    return render(request, 'addtrain.html')
+
+
+
+
+
 
 
 
@@ -452,3 +442,22 @@ def details(request):
 
 
 
+from django.conf import settings
+from django.shortcuts import render
+import razorpay
+
+def payment_view(request):
+    client = razorpay.Client(auth=(settings.rzp_test_veZ1e6COhg1pqV, settings.HPyNRI8TD19tG28P4ZSvnFDj))
+
+    if request.method == 'POST':
+        amount = int(request.POST.get('amount')) * 100  # Razorpay amount is in paise
+        order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': 1})
+        return render(request, 'payment.html', {'order': order})
+    else:
+        return render(request, 'details.html')
+
+def payment_success_view(request):
+    return render(request, 'payment_success.html')
+
+def payment_cancel_view(request):
+    return render(request, 'payment_cancel.html')

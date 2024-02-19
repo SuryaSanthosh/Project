@@ -35,11 +35,11 @@ urlpatterns=[
     path('display_route/', views.display_route, name='display_route'),
     path('search_train/', views.search_train, name='search_train'),
     path('user_index/', views.user_index, name='user_index'),
-    path('seat_selection/', views.seat_selection, name='seat_selection'),
-    path('details/', views.details, name='details'),
-    path('addtrain/', views.trainview, name='add_train'),  # Define URL pattern for add_train view
-
-
+    path('seat_selection', views.seat_selection, name='seat_selection'),
+    path('details', views.details, name='details'),
+    path('payment/', views.payment_view, name='payment'),  
+    path('payment_success/', views.payment_success_view, name='payment_success'),
+    path('payment_cancel/', views.payment_cancel_view, name='payment_cancel'),
 
 
 

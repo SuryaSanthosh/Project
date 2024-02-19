@@ -1,5 +1,3 @@
-
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +19,7 @@
         }
 
         body {
-            margin-top: 80px; /* Adjust the margin to account for the fixed header height */
+            margin-top: 140px; /* Adjust the margin to account for the fixed header height */
             /* Your existing body styles here */
         }
 
@@ -33,6 +31,50 @@
 
         #navbar ul li {
             margin-left: 20px;
+        }
+
+        .btn-group-container {
+            position: fixed;
+            top: 80px; /* Adjust the top position based on your header height */
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the background color and opacity */
+            padding: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+            z-index: 999; /* Ensure the container appears above other elements */
+        }
+
+        .btn-group-vertical {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-group-vertical a {
+            width: 100%;
+        }
+
+        .heading {
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            animation: marquee 10s linear infinite;
+            color: #fff; /* White color */
+            font-size: 24px; /* Larger font size */
+        }
+
+        /* CSS animation for scrolling text */
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
     </style>
 </head>
@@ -62,34 +104,29 @@
 
     <!-- ======= Page Content ======= -->
     <div class="container">
-        <h1>USER HOME PAGES</h1>
-        <div class="row mx-auto">
-            <!-- Your content here -->
-        </div>
-        <div class="slider-det">
-            <!-- Your slider details here -->
-        </div>
-        <div class="row" style="margin-top: 20px; opacity: 80%;">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-3">
-                <div class="btn-group-vertical">
-                    {% if request.user.is_superuser %}
-                    <a href="{% url 'train_view' %}" class="btn btn-primary btn-block">Add Trains</a>
-                    <a href="{% url 'station_list' %}" class="btn btn-primary btn-block">Add Stations</a>
-                    <a href="addR" class="btn btn-primary btn-block">Add Route</a>
-                    <a href="addRT" class="btn btn-primary btn-block">Add Route Station</a>
-                    {% endif %}
-                    <a href="edit_profile" class="btn btn-primary btn-block common-btn">Edit Profile</a>
-                    <a href="{% url 'trainview' %}" class="btn btn-primary btn-block common-btn">Search Train</a>
-                    <a href="{% url 'trainview' %}" class="btn btn-primary btn-block common-btn">Book Trains</a>
-                    <a href="#schedule" class="btn btn-primary btn-block common-btn">Check Schedule</a>
-                    <a href="#pnr" class="btn btn-primary btn-block common-btn">Check PNR</a>
-                    <a href="{% url 'seat_selection' %}" class="btn btn-primary btn-block common-btn">Select Seat</a>
-                    <a href="#cancel" class="btn btn-primary btn-block common-btn">Cancel Seat</a>
-                    <a href="{% url 'submit_feedback' %}" class="btn btn-primary btn-block common-btn">Feedback</a>
+        <h1 class="heading">USER HOME PAGES</h1>
+        <div class="marquee">Welcome to the home page. You can search your services here!!!!!!!!</div>
+        <div class="btn-group-container">
+            <div class="row mx-auto">
+                <div class="col-lg-12">
+                    <div class="btn-group-vertical">
+                        {% if request.user.is_superuser %}
+                        <a href="{% url 'train_view' %}" class="btn btn-primary">Add Trains</a>
+                        <a href="{% url 'station_list' %}" class="btn btn-primary">Add Stations</a>
+                        <a href="addR" class="btn btn-primary">Add Route</a>
+                        <a href="addRT" class="btn btn-primary">Add Route Station</a>
+                        {% endif %}
+                        <a href="edit_profile" class="btn btn-primary common-btn">Edit Profile</a>
+                        <a href="{% url 'trainview' %}" class="btn btn-primary common-btn">Search Train</a>
+                        <a href="{% url 'trainview' %}" class="btn btn-primary common-btn">Book Trains</a>
+                        <a href="#schedule" class="btn btn-primary common-btn">Check Schedule</a>
+                        <a href="#pnr" class="btn btn-primary common-btn">Check PNR</a>
+                        <a href="{% url 'seat_selection' %}" class="btn btn-primary common-btn">Select Seat</a>
+                        <a href="#cancel" class="btn btn-primary common-btn">Cancel Seat</a>
+                        <a href="{% url 'submit_feedback' %}" class="btn btn-primary common-btn">Feedback</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-1"></div>
         </div>
     </div><!-- End Container -->
 

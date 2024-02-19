@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment Form</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'payment' %}">
+        {% csrf_token %}
+        <label for="amount">Enter Amount (INR):</label>
+        <input type="number" id="amount" name="amount" required>
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

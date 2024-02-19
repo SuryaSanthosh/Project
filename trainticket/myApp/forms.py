@@ -9,23 +9,30 @@ class UserProfileForm(forms.ModelForm):
 
 
 from .models import Train
+from django import forms
+from django.forms import inlineformset_factory
+from .models import Train, Route
 
 class TrainForm(forms.ModelForm):
     class Meta:
         model = Train
-        fields = '__all__'
+        fields = ['train_id', 'train_name', 'departure_station', 'departure_time']
 
 
 
+# forms.py
+# forms.py
 
 from django import forms
-from .models import Station
+from django.forms import inlineformset_factory
+from .models import Train, Route
 
-class StationForm(forms.ModelForm):
+class TrainForm(forms.ModelForm):
     class Meta:
-        model = Station
-        fields = ['station_name', 'code']
+        model = Train
+        fields = ['train_id', 'train_name', 'departure_station', 'departure_time']
 
+# myApp/forms.py
 
 from django import forms
 from .models import Route
@@ -33,4 +40,22 @@ from .models import Route
 class RouteForm(forms.ModelForm):
     class Meta:
         model = Route
-        fields = ['destination_station', 'arrival_station', 'route_stations', 'fare_amounts']
+        fields = ['arrival_station', 'arrival_time']  # Correct fields to match the Route model
+
+RouteFormSet = inlineformset_factory(Train, Route, form=RouteForm, extra=1)
+
+
+from django import forms
+from .models import Station 
+class StationForm(forms.ModelForm):
+    class Meta:
+        model = Station
+        fields = ['name', 'location']
+
+# If you need a form for capturing payment-related data,
+# you can create a form like this:
+
+from django import forms
+
+class PaymentForm(forms.Form):
+    amount = forms.DecimalField(label='Amount', max_digits=10, decimal_places=2)

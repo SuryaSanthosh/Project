@@ -147,3 +147,27 @@ LOGIN_URL = 'login'
 
 # settings.py
 APPEND_SLASH = False
+
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
+
+RAZORPAY_API_KEY= 'rzp_test_veZ1e6COhg1pqV'
+RAZORPAY_API_SECRET='HPyNRI8TD19tG28P4ZSvnFDj'
+
+RZP_TEST_KEY='rzp_test_veZ1e6COhg1pqV'
