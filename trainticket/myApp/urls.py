@@ -2,6 +2,8 @@ from . import views
 from django.urls import path
 from .views import add_route 
 from django.contrib.auth import views as auth_views
+from .views import paydetails, payment
+
 
 urlpatterns=[
     path("",views.index,name="index"),
@@ -40,6 +42,7 @@ urlpatterns=[
     path('payment/', views.payment_view, name='payment'),  
     path('payment_success/', views.payment_success_view, name='payment_success'),
     path('payment_cancel/', views.payment_cancel_view, name='payment_cancel'),
+    path('paydetails/', paydetails, name='paydetails'),
 
 
 

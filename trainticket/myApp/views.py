@@ -461,3 +461,63 @@ def payment_success_view(request):
 
 def payment_cancel_view(request):
     return render(request, 'payment_cancel.html')
+
+from django.shortcuts import render, redirect
+
+from django.shortcuts import render, redirect
+
+from django.shortcuts import render, redirect
+
+def paydetails(request):
+    # Assuming you have the order details available in the request or session
+    order = request.session.get('order', {})  # Fetching order details from session
+
+    if request.method == 'POST':
+        # Handling form submission
+        passengers = []
+        num_seats = order.get('num_seats', 0)
+        for i in range(num_seats):
+            name = request.POST.get(f'passengerName{i}')
+            age = request.POST.get(f'passengerAge{i}')
+            gender = request.POST.get(f'passengerGender{i}')
+            phone = request.POST.get(f'passengerPhone{i}')
+            passengers.append({'name': name, 'age': age, 'gender': gender, 'phone': phone})
+        
+        # Here you can process the passengers data further (e.g., save it to the database)
+        # For demonstration, let's print the passenger details
+        for passenger in passengers:
+            print(passenger)
+
+        # Redirecting to payment success URL
+        return redirect('payment')
+
+    # Assuming you have some logic to retrieve the total number of seats
+    max_seats = 50  # Replace this with your actual logic to retrieve the total number of seats
+    seats_range = range(max_seats)
+    
+    # Render the payment page
+    return render(request, 'paydetails.html',  {'max_seats': max_seats})
+
+def payment(request):
+    # Process payment logic here
+    # After processing, render the payment success page
+    return render(request, 'payment.html')
+def select_seats(request):
+    if request.method == 'POST':
+        # Assuming you're getting the number of seats selected from a form
+        num_seats_selected = int(request.POST.get('num_seats'))
+
+        # Create or update the order object
+        order = {
+            'num_seats': num_seats_selected,
+            # Other order details
+        }
+
+        # Store the order in the session
+        request.session['order'] = order
+
+        # Redirect to the paydetails page
+        return redirect('paydetails')
+    else:
+        # Handle the GET request to render the seat selection form
+        return render(request, 'seat_selection.html')

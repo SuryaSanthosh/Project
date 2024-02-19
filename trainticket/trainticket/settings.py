@@ -167,7 +167,6 @@ LOGGING = {
 }
 
 
-RAZORPAY_API_KEY= 'rzp_test_veZ1e6COhg1pqV'
+RZP_TEST_KEY='rzp_test_veZ1e6COhg1pqV'
 RAZORPAY_API_SECRET='HPyNRI8TD19tG28P4ZSvnFDj'
 
-RZP_TEST_KEY='rzp_test_veZ1e6COhg1pqV'
