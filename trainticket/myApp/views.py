@@ -463,40 +463,40 @@ def payment_cancel_view(request):
     return render(request, 'payment_cancel.html')
 
 from django.shortcuts import render, redirect
-
-from django.shortcuts import render, redirect
-
-from django.shortcuts import render, redirect
+from .models import Passenger  # Import your Passenger model
 
 def paydetails(request):
-    # Assuming you have the order details available in the request or session
-    order = request.session.get('order', {})  # Fetching order details from session
-
     if request.method == 'POST':
-        # Handling form submission
-        passengers = []
-        num_seats = order.get('num_seats', 0)
+        # Handle form submission
+        num_seats = int(request.POST.get('num_seats', 0))
         for i in range(num_seats):
             name = request.POST.get(f'passengerName{i}')
             age = request.POST.get(f'passengerAge{i}')
             gender = request.POST.get(f'passengerGender{i}')
             phone = request.POST.get(f'passengerPhone{i}')
-            passengers.append({'name': name, 'age': age, 'gender': gender, 'phone': phone})
+            Passenger.objects.create(name=name, age=age, gender=gender, phone=phone)
         
-        # Here you can process the passengers data further (e.g., save it to the database)
-        # For demonstration, let's print the passenger details
-        for passenger in passengers:
-            print(passenger)
+        # Redirect to payment success URL
+        return redirect('payment_success')
 
-        # Redirecting to payment success URL
-        return redirect('payment')
+    selected_seats = request.GET.get('seats', '')
+    num_selected_seats = len(selected_seats.split(','))
 
-    # Assuming you have some logic to retrieve the total number of seats
-    max_seats = 50  # Replace this with your actual logic to retrieve the total number of seats
-    seats_range = range(max_seats)
-    
-    # Render the payment page
-    return render(request, 'paydetails.html',  {'max_seats': max_seats})
+    # Passengers form
+    passengers_form = []
+    for i in range(num_selected_seats):
+        passengers_form.append({
+            'name': f'passengerName{i}',
+            'age': f'passengerAge{i}',
+            'gender': f'passengerGender{i}',
+            'phone': f'passengerPhone{i}'
+        })
+
+    return render(request, 'paydetails.html', {
+        'passengers_form': passengers_form,
+        'num_seats': num_selected_seats
+    })
+
 
 def payment(request):
     # Process payment logic here

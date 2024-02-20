@@ -59,3 +59,13 @@ from django import forms
 
 class PaymentForm(forms.Form):
     amount = forms.DecimalField(label='Amount', max_digits=10, decimal_places=2)
+
+# forms.py
+
+from django import forms
+from .models import Seat
+
+class SeatSelectionForm(forms.ModelForm):
+    class Meta:
+        model = Seat
+        fields = ['seat_number', 'class_type']
