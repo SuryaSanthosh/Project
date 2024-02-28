@@ -131,7 +131,7 @@
                 <input type="text" name="{{ passenger.name }}" placeholder="Name" pattern="[A-Za-z\s]+" title="Please enter only letters" onblur="validateField(this)" required>
                 <span class="validation-message" id="{{ passenger.name }}ValidationError"></span>
                 <br>
-                <input type="text" name="{{ passenger.age }}" placeholder="Age" pattern="[0-9]{2}" title="Please enter a 2-digit number" required>
+                <input type="text" name="{{ passenger.age }}" placeholder="Age" pattern="[0-9]{2}" title="Please enter a 2-digit number" onblur="validateField(this)" required>
                 <span class="validation-message" id="{{ passenger.age }}ValidationError"></span>
                 <br>
                 <select name="{{ passenger.gender }}" required>
@@ -142,16 +142,23 @@
                 </select>
                 <span class="validation-message" id="{{ passenger.gender }}ValidationError"></span>
                 <br>
-                <input type="text" name="{{ passenger.phone }}" placeholder="Phone" pattern="[6-9][0-9]{9}" title="Please enter a 10-digit number starting with 6, 7, 8, or 9" required>
+                <input type="text" name="{{ passenger.phone }}" placeholder="Phone" pattern="[6-9][0-9]{9}" title="Please enter a 10-digit number starting with 6, 7, 8, or 9" onblur="validateField(this)" required>
                 <span class="validation-message" id="{{ passenger.phone }}ValidationError"></span>
                 <br>
             {% endfor %}
             <input type="hidden" name="num_seats" value="{{ num_seats }}">
             <input type="submit" value="Proceed to Payment">
+
+
+            
         </form>
     </div>
 
     <script>
+
+
+
+
         function validateForm() {
             var form = document.querySelector('form');
             var inputs = form.querySelectorAll('input[type="text"], select');
