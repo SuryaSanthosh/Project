@@ -28,10 +28,9 @@ class SeatSelectionForm(forms.ModelForm):
         model = Seat
         fields = ['seat_number', 'class_type']
 
-from django import forms
 from .models import UserProfile
-
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
-        fields = ['field1', 'field2']  # Include the fields from UserProfile
+        model = UserProfile  # Replace with your user profile model
+        fields = [ 'phone', 'profile_photo','user']
+

@@ -237,7 +237,7 @@ def dashboard(request):
 
 from django.shortcuts import render, redirect
 from .forms import TrainForm, RouteFormSet
-from .models import Train
+from .models import Trains
 from .models import Route, RouteDetails
 
 
@@ -280,9 +280,9 @@ def add_train(request):
 
 
 
-from .models import Train
+from .models import Trains
 def trainview(request):
-    trains = Train.objects.all()  # Retrieve all available trains from the database
+    trains = Trains.objects.all()  # Retrieve all available trains from the database
     context = {'trains': trains}
     return render(request, 'trainview.html', context)
 
@@ -377,7 +377,7 @@ def display_route(request):
 
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Train
+from .models import Trains
 
 def train_search(request):
     if request.method == 'POST':
@@ -387,7 +387,7 @@ def train_search(request):
 
         # Perform your search logic here based on the criteria
         # For simplicity, let's assume we filter by origin and destination
-        trains = Train.objects.filter(origin__icontains=origin, destination__icontains=destination)
+        trains = Trains.objects.filter(origin__icontains=origin, destination__icontains=destination)
 
         # Convert train objects to a list of dictionaries for JSON response
         train_list = [

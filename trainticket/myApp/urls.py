@@ -3,7 +3,7 @@ from django.urls import path
 from .views import add_route 
 from django.contrib.auth import views as auth_views
 from .views import paydetails, payment
-from myApp.views import train_view
+from myApp.views import trainview
 
 urlpatterns=[
     path("",views.index,name="index"),
