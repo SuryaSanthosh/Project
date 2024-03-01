@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('myApp', '0004_train'),
+        ('myApp', '0003_feedback'),
     ]
 
     operations = [

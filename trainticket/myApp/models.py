@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
@@ -29,16 +26,6 @@ class Feedback(models.Model):
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
-
-
-
-
-
-
-
-
-# models.py
-
 from django.db import models
 
 class Station(models.Model):
@@ -51,26 +38,31 @@ class Station(models.Model):
 
 from django.db import models
 from django.utils import timezone
-class Train(models.Model):
-    train_id = models.CharField(max_length=50)  # Add this line
-    train_name = models.CharField(max_length=100)
-    departure_station = models.CharField(max_length=100)
-    departure_time = models.TimeField()
-    arrival_station = models.CharField(max_length=100)
-    arrival_time = models.TimeField(null=True, blank=True)
-
-    def __str__(self):
-        return self.train_name
 
 class Route(models.Model):
-    train = models.ForeignKey(Train, on_delete=models.CASCADE, related_name='routes')
+    trains = models.ForeignKey('Trains', on_delete=models.CASCADE)
     arrival_station = models.CharField(max_length=100)
     arrival_time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"Route for {self.train} to {self.arrival_station}"
+        return f"{self.arrival_station} - {self.arrival_time}"
 
-# models.py
+from django.db import models
+
+class Trains(models.Model):
+    train_id = models.CharField(max_length=50, unique=True)    
+    train_name = models.CharField(max_length=100)
+    departure_station = models.CharField(max_length=100)
+    departure_time = models.TimeField()
+    operating_days = models.CharField(max_length=100)  
+    train_type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.train_name
+
+
+
+
 
 from django.db import models
 
@@ -79,10 +71,8 @@ class RouteDetails(models.Model):
     pass
 
 
-# If you need to store payment-related information in your database,
-# you can create models for it. For example:
 
-from django.db import models
+
 
 class Payment(models.Model):
     order_id = models.CharField(max_length=255)
@@ -99,7 +89,7 @@ class Order(models.Model):
     pass
 
 
-# models.py
+
 
 from django.db import models
 
@@ -109,7 +99,7 @@ class Seat(models.Model):
 
     def __str__(self):
         return self.seat_number
-# models.py
+
 
 from django.db import models
 

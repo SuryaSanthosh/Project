@@ -98,23 +98,38 @@
     </div>
     <div class="container">
         <h2>Train Details</h2>
-        <div>
-            <p><strong>Train ID:</strong> {{ train.train_id }}</p>
-            <p><strong>Train Name:</strong> {{ train.train_name }}</p>
-            <p><strong>Departure Station:</strong> {{ train.departure_station }}</p>
-            <p><strong>Departure Time:</strong> {{ train.departure_time }}</p>
-            <h3>Routes:</h3>
-            <ul>
-                {% for route in train.routes.all %}
-                    <li>
-                        <p><strong>Arrival Station:</strong> {{ route.arrival_station }}</p>
-                        <p><strong>Arrival Time:</strong> {{ route.arrival_time }}</p>
-                    </li>
+        <h2>Train Details</h2>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Train ID</th>
+                    <th>Train Name</th>
+                    <th>Departure Station</th>
+                    <th>Departure Time</th>
+                    <th>Operating Days</th>
+                    <th>Type of Train</th>
+                    <th>Routes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for train in trains %}
+                <tr>
+                    <td>{{ train.train_id }}</td>
+                    <td>{{ train.train_name }}</td>
+                    <td>{{ train.departure_station }}</td>
+                    <td>{{ train.departure_time }}</td>
+                    <td>{{ train.operating_days }}</td>
+                    <td>{{ train.train_type }}</td>
+                    <td>
+                        <ul>
+                            {% for route in train.routes.all %}
+                            <li>{{ route.arrival_station }} - {{ route.arrival_time }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
                 {% endfor %}
-            </ul>
-
-
-        <!-- Add other train details here -->
-    </div>
+            </tbody>
+        </table>
 </body>
 </html>

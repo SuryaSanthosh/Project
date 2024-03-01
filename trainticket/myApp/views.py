@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponse
 from .models import User 
 from .models import UserProfile  # Import the UserProfileForm from your app's forms.py
-from .forms import UserProfileForm
+from .forms import UserProfileForm, TrainForm
 from django.contrib.auth import authenticate ,login as auth_login,logout
 from django.contrib import messages
 
@@ -240,23 +240,36 @@ from .forms import TrainForm, RouteFormSet
 from .models import Train
 from .models import Route, RouteDetails
 
+
+
 from django.shortcuts import render, redirect
-from .models import Train
-from .forms import TrainForm
+from .models import Trains
 
 def add_train(request):
     if request.method == 'POST':
-        form = TrainForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('train_view')
-    else:
-        form = TrainForm()
-    return render(request, 'addtrain.html', {'form': form})
+        # Retrieve data from the form
+        train_id = request.POST.get('train_id')
+        train_name = request.POST.get('train_name')
+        departure_station = request.POST.get('departure_station')
+        departure_time = request.POST.get('departure_time')
+        operating_days = request.POST.getlist('operating_days[]')  # Retrieve as list
+        train_type = request.POST.get('train_type')
 
-def train_view(request):
-    trains = Train.objects.all()
-    return render(request, 'trainview.html', {'trains': trains})
+        # Create and save the train object
+        train = Trains.objects.create(
+            train_id=train_id,
+            train_name=train_name,
+            departure_station=departure_station,
+            departure_time=departure_time,
+            operating_days=operating_days,
+            train_type=train_type
+        )
+
+        # Redirect to trainview.html after adding the train
+        return redirect('trainview')  # Assuming 'train_view' is the name of the URL pattern for trainview.html
+    else:
+        # Render the add train form template
+        return render(request, 'addtrain.html')
 
 
 

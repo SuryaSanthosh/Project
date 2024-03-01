@@ -5,6 +5,6 @@ admin.site.register(User)
 
 
 
-from .models import Train
+from .models import Trains
 
-admin.site.register(Train)
+admin.site.register(Trains)
