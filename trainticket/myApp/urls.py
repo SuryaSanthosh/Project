@@ -4,7 +4,7 @@ from .views import add_route
 from django.contrib.auth import views as auth_views
 from .views import paydetails, payment
 from myApp.views import trainview
-
+from .views import user_search
 urlpatterns=[
     path("",views.index,name="index"),
     
@@ -43,8 +43,7 @@ urlpatterns=[
     path('payment_success/', views.payment_success_view, name='payment_success'),
     path('payment_cancel/', views.payment_cancel_view, name='payment_cancel'),
     path('paydetails/', paydetails, name='paydetails'),
-
-
+    path('usersearch/', user_search, name='usersearch'),
 
 
 

@@ -1,3 +1,5 @@
+
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -37,29 +39,27 @@ class Station(models.Model):
 
 
 from django.db import models
-from django.utils import timezone
-
-class Route(models.Model):
-    trains = models.ForeignKey('Trains', on_delete=models.CASCADE)
-    arrival_station = models.CharField(max_length=100)
-    arrival_time = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"{self.arrival_station} - {self.arrival_time}"
-
-from django.db import models
 
 class Trains(models.Model):
-    train_id = models.CharField(max_length=50, unique=True)    
+    train_id = models.CharField(max_length=20, unique=True)
     train_name = models.CharField(max_length=100)
     departure_station = models.CharField(max_length=100)
     departure_time = models.TimeField()
-    operating_days = models.CharField(max_length=100)  
+    operating_days = models.CharField(max_length=100)  # You can adjust this field as needed
     train_type = models.CharField(max_length=50)
+    number_of_seats = models.IntegerField(null=True)
 
-    def __str__(self):
-        return self.train_name
+class Route(models.Model):
+    train = models.ForeignKey(Trains, on_delete=models.CASCADE)
+    arrival_station = models.CharField(max_length=100)
+    arrival_date = models.DateField()
+    arrival_time = models.TimeField()
 
+class Compartment(models.Model):
+    train = models.ForeignKey(Trains, on_delete=models.CASCADE)
+    compartment_type = models.CharField(max_length=100)
+    num_compartments = models.IntegerField()
+    compartment_capacity = models.IntegerField()
 
 
 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/img/1.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* Ensure the header stays on top of other elements */
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .header-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .header-buttons button {
+            margin-left: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .header-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 70px auto 20px; 
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .mt-4 {
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Railyathra</h1>
+        <div class="header-buttons">
+            <button onclick="location.href='{% url "dashboard" %}'">Home</button>
+            <button onclick="location.href='help.html'">Help</button>
+            <button onclick="location.href='{% url "handlelogout" %}'">Logout</button>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2> Search For Train</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="departure_station">Departure Station:</label>
+                <input type="text" class="form-control" id="departure_station" name="departure_station" placeholder="Enter Departure Station" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="arrival_station">Arrival Station:</label>
+                <input type="text" class="form-control" id="arrival_station" name="arrival_station" placeholder="Enter Arrival Station" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="departure_date">Departure Date:</label>
+                <input type="date" class="form-control" id="departure_date" name="departure_date" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+        <!-- Display search results here -->
+        {% if trains %}
+        <div class="mt-4">
+            <h3>Search Results:</h3>
+            <ul>
+                {% for train in trains %}
+                <li>
+                    <strong>Train ID:</strong> {{ train.train_id }}<br>
+                    <strong>Train Name:</strong> {{ train.train_name }}<br>
+                    <strong>Departure Time:</strong> {{ train.departure_time }}<br>
+                    <strong>Departure Date:</strong> {{ train.departure_date }}<br>
+                    <!-- Add more train details as needed -->
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <div class="mt-4">
+            <p>No trains available on this day....</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Scripts -->
+    <!-- Include necessary scripts if required -->
+</body>
+</html>

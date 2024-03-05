@@ -1,7 +1,10 @@
+
+
+
 from django.shortcuts import render,redirect,HttpResponse
 from .models import User 
 from .models import UserProfile  # Import the UserProfileForm from your app's forms.py
-from .forms import UserProfileForm, TrainForm
+from .forms import UserProfileForm, AddTrainForm
 from django.contrib.auth import authenticate ,login as auth_login,logout
 from django.contrib import messages
 
@@ -224,7 +227,7 @@ def adminfeedback(request):
 
 
 
-from .forms import TrainForm
+
 
 def dashboard(request):
     # You can add logic here to retrieve data for the dashboard
@@ -236,58 +239,43 @@ def dashboard(request):
 
 
 from django.shortcuts import render, redirect
-from .forms import TrainForm, RouteFormSet
+from .forms import  RouteFormSet
 from .models import Trains
 from .models import Route, RouteDetails
-
+from .forms import UserProfileForm
+from .forms import AddTrainForm, RouteForm, CompartmentForm
+from django.http import HttpResponse
 
 
 from django.shortcuts import render, redirect
-from .models import Trains
+from django.http import HttpResponse
+from .forms import AddTrainForm
 
 def add_train(request):
     if request.method == 'POST':
-        # Retrieve data from the form
-        train_id = request.POST.get('train_id')
-        train_name = request.POST.get('train_name')
-        departure_station = request.POST.get('departure_station')
-        departure_time = request.POST.get('departure_time')
-        operating_days = request.POST.getlist('operating_days[]')  # Retrieve as list
-        train_type = request.POST.get('train_type')
+        form = AddTrainForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the form data to the database
+            return HttpResponse('Train added successfully!')  # Return success message
+        else:
+            # Form data is invalid, handle errors
+            return HttpResponse('Invalid form data. Please check the fields and try again.')
 
-        # Create and save the train object
-        train = Trains.objects.create(
-            train_id=train_id,
-            train_name=train_name,
-            departure_station=departure_station,
-            departure_time=departure_time,
-            operating_days=operating_days,
-            train_type=train_type
-        )
-
-        # Redirect to trainview.html after adding the train
-        return redirect('trainview')  # Assuming 'train_view' is the name of the URL pattern for trainview.html
     else:
-        # Render the add train form template
-        return render(request, 'addtrain.html')
+        # Render the form template
+        form = AddTrainForm()  # Create an instance of the form
+        return render(request, 'addtrain.html', {'form': form})
 
 
 
+# views.py
 
+from django.shortcuts import render
+from django.http import HttpResponse
 
-
-
-
-
-
-from .models import Trains
 def trainview(request):
-    trains = Trains.objects.all()  # Retrieve all available trains from the database
-    context = {'trains': trains}
-    return render(request, 'trainview.html', context)
-
-
-
+    # Your view logic here
+    return HttpResponse("trainview")
 
 
 from .models import Station
@@ -315,7 +303,7 @@ def myprofile(request):
     return render(request, 'myprofile.html')
 
 
-# views.py
+
 from django.shortcuts import render, redirect
 from .models import Route, RouteDetails
 from .forms import RouteForm
@@ -534,3 +522,22 @@ def select_seats(request):
     else:
         # Handle the GET request to render the seat selection form
         return render(request, 'seat_selection.html')
+
+
+from django.shortcuts import render
+from .forms import UserSearchForm
+from .models import Trains
+
+def user_search(request):
+    if request.method == 'POST':
+        form = UserSearchForm(request.POST)
+        if form.is_valid():
+            departure_station = form.cleaned_data['departure_station']
+            arrival_station = form.cleaned_data['arrival_station']
+            departure_date = form.cleaned_data['departure_date']
+            # Query database for trains matching the search criteria
+            trains = Trains.objects.filter(departure_station=departure_station, arrival_station=arrival_station, departure_date=departure_date)
+            return render(request, 'usersearch.html', {'form': form, 'trains': trains})
+    else:
+        form = UserSearchForm()
+    return render(request, 'usersearch.html', {'form': form})

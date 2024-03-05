@@ -1,20 +1,34 @@
+
+
 from django import forms
 from django.forms.models import inlineformset_factory
-from .models import Trains, Route, Station, Seat  # Import other necessary models
+from .models import Trains, Route, Station, Seat,Compartment # Import other necessary models
 
-class TrainForm(forms.ModelForm):
+from django import forms
+
+class AddTrainForm(forms.Form):
+    train_id = forms.CharField(max_length=100)
+    train_name = forms.CharField(max_length=100)
+    departure_station = forms.CharField(max_length=100)
+    departure_time = forms.TimeField()
+    operating_days = forms.MultipleChoiceField(choices=[('sunday', 'Sunday'), ('monday', 'Monday'), ('tuesday', 'Tuesday'), ('wednesday', 'Wednesday'), ('thursday', 'Thursday'), ('friday', 'Friday'), ('saturday', 'Saturday')])
+    train_type = forms.ChoiceField(choices=[('express', 'Express'), ('local', 'Local'), ('high-speed', 'High-Speed'), ('seasonal', 'Seasonal')])
+    number_of_seats = forms.IntegerField()
+
+from django import forms
+from django.forms import formset_factory
+
+class RouteForm(forms.Form):
+    arrival_station = forms.CharField(max_length=100)
+    arrival_date = forms.DateField()
+    arrival_time = forms.TimeField()
+
+RouteFormSet = formset_factory(RouteForm, extra=1)
+
+class CompartmentForm(forms.ModelForm):
     class Meta:
-        model = Trains
-        fields = ['train_id', 'train_name', 'departure_station', 'departure_time', 'operating_days', 'train_type']
-
-class RouteForm(forms.ModelForm):
-    class Meta:
-        model = Route
-        fields = ['arrival_station', 'arrival_time']
-
-# Define RouteFormSet using inlineformset_factory
-RouteFormSet = inlineformset_factory(Trains, Route, form=RouteForm, extra=1)
-
+        model = Compartment
+        fields = ['compartment_type', 'num_compartments', 'compartment_capacity']
 class StationForm(forms.ModelForm):
     class Meta:
         model = Station
@@ -34,3 +48,9 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile  # Replace with your user profile model
         fields = [ 'phone', 'profile_photo','user']
 
+from django import forms
+
+class UserSearchForm(forms.Form):
+    departure_station = forms.CharField(max_length=100)
+    arrival_station = forms.CharField(max_length=100)
+    departure_date = forms.DateField()
