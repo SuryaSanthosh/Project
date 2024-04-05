@@ -39,11 +39,12 @@ urlpatterns=[
     path('user_index/', views.user_index, name='user_index'),
     path('seat_selection', views.seat_selection, name='seat_selection'),
     path('details', views.details, name='details'),
-    path('payment/', views.payment_view, name='payment'),  
+    # path('payment/', views.payment_view, name='payment'),  
     path('payment_success/', views.payment_success_view, name='payment_success'),
     path('payment_cancel/', views.payment_cancel_view, name='payment_cancel'),
     path('paydetails/', paydetails, name='paydetails'),
     path('usersearch/', user_search, name='usersearch'),
+    
 
 
 

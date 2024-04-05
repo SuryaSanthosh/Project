@@ -445,17 +445,17 @@ def details(request):
 
 from django.conf import settings
 from django.shortcuts import render
-import razorpay
+# import razorpay
 
-def payment_view(request):
-    client = razorpay.Client(auth=(settings.rzp_test_veZ1e6COhg1pqV, settings.HPyNRI8TD19tG28P4ZSvnFDj))
+# def payment_view(request):
+#     client = razorpay.Client(auth=(settings.rzp_test_veZ1e6COhg1pqV, settings.HPyNRI8TD19tG28P4ZSvnFDj))
 
-    if request.method == 'POST':
-        amount = int(request.POST.get('amount')) * 100  # Razorpay amount is in paise
-        order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': 1})
-        return render(request, 'payment.html', {'order': order})
-    else:
-        return render(request, 'details.html')
+#     if request.method == 'POST':
+#         amount = int(request.POST.get('amount')) * 100  # Razorpay amount is in paise
+#         order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': 1})
+#         return render(request, 'payment.html', {'order': order})
+#     else:
+#         return render(request, 'details.html')
 
 def payment_success_view(request):
     return render(request, 'payment_success.html')

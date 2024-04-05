@@ -2,14 +2,13 @@ from django.apps import AppConfig
 
 
 class MyAppConfig(AppConfig):
-    
     name = 'myApp'
 
 
 
 
 from flask import Flask, render_template, request, redirect, url_for
-#from train import Train
+# from train import Train
 
 app = Flask(__name__)
 
